@@ -1,0 +1,17 @@
+SCOPUS
+(Higher education AND Teaching strategies) OR (learning strategies)
+AND (Interactive learning environment) - 413
+
+(Teacher education) AND (Pedagogical issue) AND (Improving classroom teaching) - 348
+
+Sort by - Relevance
+2018 - 2023
+Subject area - Social Sciences
+Document type - Article
+Language - english
+Keywords:
+- Student
+- Teacher Education
+- Teacher
+
+Higher education AND Teaching strategies OR learning strategies AND Interactive learning environment AND PUBYEAR > 2018 AND PUBYEAR < 2023 AND ( LIMIT-TO ( DOCTYPE,"ar" ) ) AND ( LIMIT-TO ( SUBJAREA,"SOCI" ) ) AND ( LIMIT-TO ( LANGUAGE,"English" ) ) AND ( LIMIT-TO ( EXACTKEYWORD,"Teacher" ) OR LIMIT-TO ( EXACTKEYWORD,"Teacher Education" ) OR LIMIT-TO ( EXACTKEYWORD,"Student" ) )
