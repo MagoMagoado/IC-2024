@@ -1,0 +1,65 @@
+From 51 disciplines under social sciences, nine subjects are directly related to education (early childhood education, education, educational administration, educational psychology & counselling, educational technology, higher education, science & engineering education, special education, teaching & teacher education).
+
+We also selected some journals on education economics, education ethics, educational review, vocational education, comprehensive journals and so on. All papers published between 2000 and May 2018 in these journals were downloaded.
+
+------------------------------------------------------------
+
+9 das 51 disciplinas das ciências sociais estão diretamente relacionadas à educação: educação infantil, educação, administração educacional, psicologia e aconselhamento educacional, tecnologia educacional, ensino superior. , educação em ciências e engenharia, educação especial, ensino e formação de professores.
+
+Também foram selecionados alguns periódicos sobre economia da educação, ética educacional, revisão educacional, educação profissional, compreensão
+diários extensos e assim por diante. Todos os artigos publicados entre 2000 e maio de 2018 em esses diários foram baixados.
+
+Foi usado o método de análise de tópicos baseado em bibliometria (análise estatística de textos científicos. Envolve análises baseadas em relações de citação, relações de co-ocorrência, abordagens baseadas em indicadores e as abordagens baseadas em tópicos.
+
+Dois periódicos (revistas) foram selecionados de cada área temática com base em fatores de impacto dos periódicos e opiniões de especialistas.
+
+Foi construído as redes de coocorrência com as palavras-chave dos periódicos.
+
+-----------------------------------------------------------
+
+Web Of Science:
+ searches were made in this group of journals (document type: article; language: English; time: 2000–2018). A total of 19,750 papers were obtained (last retrieval time: 15 May 2018). Since 2018 is not a complete publication year, only papersfrom 2000 to 2017 were analysed (totalling 19,084 papers).
+
+VOSviewer -> software para construir a rede de co-ocorrência
+
+
+Records Instances	Author Keywords-cleaned
+631 	631		Higher education
+588 	588		Interactive learning environment
+549 	549		Teaching/learning strategies
+464 	471		Teacher education
+390 	390		Pedagogical issue
+375 	375		Improving classroom teaching
+297 	297		Professional development
+296 	296		Human capital
+282 	282		Computer-mediated communication
+277 	277		Media in education
+
+
+Principais tópicos separados em períodos:
+
+2000–2007:
+1) Teacher education,  discourse analysis, diversity e conceptual changes
+2) Teaching/learning strategies e  interactive learning environments
+4) Human capital, educational finance e demand for schooling
+5) Higher education, including assessment, student achievement, and globalisation
+
+2008–2014:
+1) Teacher education, including professional development and teacher identity
+2) Teaching/learning strategies, including distance education and telelearning, elementary education, and intelligent tutoring systems
+3) Higher education, including emotions and identity
+
+2015–2017:
+1) Higher education, including the sub-topics of governmentality, quality, education policy, doctoral education, and international students
+2) Teacher education, including professional development, engagement, and academic achievement
+3) Mathematics, including intervention, rational numbers, and preschool
+4) Interactive learning environment
+5) Improving classroom teaching
+
+
+5 tópicos principais:
+1) (azul) Interactive learning environment and teaching/learning strategies
+2) (amarelo) Human capital and educational finance
+3) (laranja) Teacher education
+4) (verde) Higher education
+5) (red) Equity and social justice
