@@ -1,0 +1,2 @@
+Alguns modelos de destaque nessa área são: Self-Aggregation Based Topic
+Model (SATM), Conditional Random Field Regularized Topic Model (CRFTM), PseudoDocument-Based Topic Modeling (PTM), e Meta-Info Guided Aggregation (MIGA)
