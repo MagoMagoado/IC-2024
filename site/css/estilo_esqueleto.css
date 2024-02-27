@@ -31,6 +31,11 @@ p {
     cursor: default;
 }
 
+li{
+    font-style: none;
+    list-style: none;
+}
+
 * {
     font-family: roboto-light;
     font-size: 12pt;
@@ -40,32 +45,21 @@ p {
 body {
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 20vh auto 10vh;
-    grid-template-areas: 'header' 'main' 'footer';
+    grid-template-rows: min-content auto;
+    grid-template-areas: 'header' 'main';
 }
 
 header {
     grid-area: header;
-    display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 100%;
-    grid-template-areas: 'nav';
-}
-
-header #nav {
-    background-color: #36363657;
+    background-color: #eaeef6;
 }
 
 #main {
     grid-area: main;
+    background-color: #eaeef6;
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 100%;
     justify-items: center;
     align-items: center;
-    background-color: rgb(3, 6, 32);
-}
-#footer {
-    grid-area: footer;
-    background-color: rgb(3, 6, 32);
 }

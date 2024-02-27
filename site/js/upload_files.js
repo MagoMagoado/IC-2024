@@ -22,18 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				.join("")}`;
 			
 			setTimeout(() => {
-				$("#files-active").innerHTML = `
-					<p class="titles-file">FILES</p>
-					${linesFiles}
-					<div class="buttons-upload">
-						<button>
-							<span id="cancel-upload-files">cancel</span>
-						</button>
-						<button>
-							<span id="confirm-upload-files">confirm files</span>
-						</button>
-					</div>
-				`;
+				$(".lines-update").innerHTML = `${linesFiles}`;
 			}, 2000);
         }
 

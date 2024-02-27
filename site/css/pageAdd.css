@@ -1,0 +1,98 @@
+.navbar {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    background: #fff;
+    border-radius: 10px;
+    padding: 1rem 0;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.03);
+    height: calc(100vh - 4rem);
+}
+
+.navbar__link {
+position: relative;
+display: flex;
+align-items: center;
+justify-content: center;
+height: 5.5rem;
+width: 5.5rem;
+color: #6a778e;
+transition: 250ms ease all;
+}
+
+.navbar__link span {
+position: absolute;
+text-wrap: nowrap;
+left: 100%;
+transform: translate(-3rem);
+margin-left: 1rem;
+opacity: 0;
+pointer-events: none;
+color: #000000;
+background: #fff;
+padding: 0.75rem;
+transition: 250ms ease all;
+border-radius: 17.5px;
+}
+
+.navbar__link:hover {
+color: #fff;
+}
+
+.navbar:not(:hover) .navbar__link:focus,
+.navbar__link:hover span {
+opacity: 1;
+transform: translate(0);
+}
+
+.navbar__menu {
+position: relative;
+padding: 0;
+}
+
+.navbar__item img:nth-child(1){
+    width: 30px;
+}
+.navbar__item:nth-child(2) img{
+    padding: 1rem;
+    border-radius: 10px;
+    background-color: rgba(77, 182, 172, 0.7);
+}
+
+#help_button{
+    position: fixed;
+    width: 70px;
+    bottom: 2rem;
+    right: 4rem;
+    transform: scale(1);
+    transform-origin: center;
+    will-change: opacity, transform, top;
+    transition: opacity .2s ease, transform .2s ease, top .2s ease;
+    cursor:pointer;
+}
+#help_button:hover{
+    transform: scale(1.1);
+}
+
+.typewriter{
+    height: fit-content;
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .15em; /* Adjust as needed */
+    background-color: #fff;
+    padding: .5rem 1rem;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+.typewriter b:nth-child(1){
+    color: #2e4946;
+    font-size: 1.5rem;
+    font-weight: 100;
+}
+.typewriter b:nth-child(2){
+    color: #4db6ac;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bolder;
+    font-size: 2.5rem;
+}
+

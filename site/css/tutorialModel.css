@@ -89,7 +89,7 @@
     stroke-dashoffset: 1000;
 }  
 .animate-path-vert {
-    animation: draw1 8s linear alternate;
+    animation: draw1 8s linear alternate both;
 }
 @keyframes draw1 {
     from {

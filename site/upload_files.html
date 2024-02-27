@@ -11,37 +11,47 @@
     <!-------------------------------------->
     <link rel="stylesheet" href="css/estilo_esqueleto.css">
     <link rel="stylesheet" href="css/input_bar.css">
+    <link rel="stylesheet" href="css/pageAdd.css">
     <!-------------------------------------->
     <script type="text/javascript" src="js/upload_files.js"></script>
 </head>
 <body>
     <header>
-        <div id="nav">
-
-        </div>
+        <p class="typewriter"><b>Topic</b><b>Generation</b></p>
     </header>
     <div id="main">
+        <nav class="navbar">
+            <ul class="navbar__menu">
+                <li class="navbar__item">
+                    <a href="#" class="navbar__link"><img src="img/home2.png" alt="add files"><span>Home</span></a>
+                  </li>
+              <li class="navbar__item">
+                <a href="#" class="navbar__link"><img src="img/add2.png" alt="add files"><span>Add files</span></a>
+              </li>
+              <li class="navbar__item">
+                <a href="#" class="navbar__link"><img src="img/all-documents.png" alt="all files"></i><span>All files</span></a>        
+              </li>
+              <li class="navbar__item">
+                <a href="#" class="navbar__link"><img src="img/search.png" alt="all files"><span>Search files</span></a>        
+              </li>
+            </ul>
+        </nav>
         <div id="upload-files">
-            <div>
+            <div class="titUpLoad">
                 <p>
                     <span class="up">up</span>
                     <span>load</span>
                 </p>
             </div>
-            <div id="drop" class="hidden">
+            <div id="drop">
                 <img id="icon-upload-file" src="img/icon-upload-file.svg" alt="upload files">
                 <p class="pointer-none"><b style="color: #4db6ac;">Drag and drop</b> files here <br /> or <a href=""
                         id="triggerFile" style="color: #4db6ac;">browse</a> to begin the upload</p>
                 <input type="file" multiple="multiple"/>
             </div>
-            <div id="files-active" class="file">
+            <div id="files-active" class="file hidden">
                 <p class="titles-file">FILES</p>
-                <div class="linha">
-                    <p class="name">Arquivo aleatório</p>
-                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 1000 1000">
-                        <g><path id="path" d="M500,10C229.4,10,10,229.4,10,500c0,270.6,219.4,490,490,490c270.6,0,490-219.4,490-490C990,229.4,770.6,10,500,10z M500,967.7C241.7,967.7,32.3,758.3,32.3,500C32.3,241.7,241.7,32.3,500,32.3c258.3,0,467.7,209.4,467.7,467.7C967.7,758.3,758.3,967.7,500,967.7z M748.4,325L448,623.1L301.6,477.9c-4.4-4.3-11.4-4.3-15.8,0c-4.4,4.3-4.4,11.3,0,15.6l151.2,150c0.5,1.3,1.4,2.6,2.5,3.7c4.4,4.3,11.4,4.3,15.8,0l308.9-306.5c4.4-4.3,4.4-11.3,0-15.6C759.8,320.7,752.7,320.7,748.4,325z"</g>
-                    </svg>
-                </div>
+                <div class="lines-update"></div>
                 <div class="buttons-upload">
                     <button>
                         <span id="cancel-upload-files">cancel</span>
@@ -52,9 +62,7 @@
                 </div>
            </div>
         </div>
-    </div>    
-    <div id="footer">
-
+        <img id="help_button" src="img/help5_2.png" alt="all files">
     </div>
 </body>
 </html>
