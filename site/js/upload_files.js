@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", function() {
         //Init
         function handleFileSelect(evt) {
             const files = evt.target.files; // FileList object
+			
+			$(".lines-update").innerHTML = ``;
 
 			$("#drop").classList.add("hidden");
 			$("#files-active").classList.remove("hidden");
@@ -29,9 +31,23 @@ document.addEventListener("DOMContentLoaded", function() {
 		//trigger
         $("#triggerFile").addEventListener("click", evt => {
             evt.preventDefault();
-			//Active input
             $("input[type=file]").click();
         });
+		// drop events
+				$("#drop").ondragleave = evt => {
+			$("#drop").classList.remove("active");
+			evt.preventDefault();
+		};
+		$("#drop").ondragover = $("#drop").ondragenter = evt => {
+			$("#drop").classList.add("active");
+			evt.preventDefault();
+		};
+		$("#drop").ondrop = evt => {
+			$("input[type=file]").files = evt.dataTransfer.files;
+			$("#drop").classList.remove("active");
+			handleFileSelect();
+			evt.preventDefault();
+		};
 		//cancel
 		$("#cancel-upload-files").addEventListener("click", evt => {
             evt.preventDefault();

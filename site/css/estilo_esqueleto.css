@@ -7,6 +7,10 @@
     src: url(../fonts/Mukta/Mukta-Regular.ttf);
 }
 @font-face {
+    font-family: mukta-medium;
+    src: url(../fonts/Mukta/Mukta-Medium.ttf);
+}
+@font-face {
     font-family: mukta-bold;
     src: url(../fonts/Mukta/Mukta-ExtraBold.ttf);
 }

@@ -1,0 +1,16 @@
+Como bolsista PIBIC da Universidade Estadual de Campinas, tenho desde o período de iniciação da minha bolsa pesquisado e estudado por artigos e documentos de cunho educacional sobre assuntos relacionados ao Processamento de Linguagem Natural (PLN). O PLN é uma das áreas da inteligência artificial que compreende teorias e métodos que permitem a comunicação eficaz entre humanos e computadores em linguagem natural, traduzindo a linguagem humana (ou natural) em comandos que podem ser executados por computadores.
+Após o estudo e revisam de alguns artigos focados no NPL e seus modelos, isto é, sistemas de inteligência artificial com foco de processamento e resultado específico a ser evidenciado, chegou-se a refinamento de idealização do que seria o projeto da iniciação científica: um ambiente (web site) na qual se possa lidar com diferentes textos usando o modelo de modelagem de tópicos do PLN. Os algoritmos a serem utilizados do modelo ainda estão em análise, mas se é certo que entre eles estão aqueles que já são amplamente ultilizado pela comunidade, como o LDA e LSA.
+
+A seguir, estão organizados em tópicos o fluir dos estudos realizados até então:
+- Pesquisa e estudos de artigos sobre PLN e Modelagem de tópicos;
+- Tentativa de reproduzir possível tema envolvendo a evolução dos tópicos mais quentes dentro da área de educação. A ideia foi descartada;
+- Desenvolvimento do front para o ambiente de análise dos algoritmos de modelagem de tópicos e revisões do progresso com orientadores;
+
+O progresso da pesquisa começa com estudos voltando a artigos que foram selecionados devido a sua aproximação com o contexto daquilo que se buscava desenvolver no projeto, uma possível aplicação do PLN através da modelagem de tópicos. Com reuniões e conversas semanais com os orientandos, tive como primeiro objetivo realizar uma coleta de informações acerca da ideia do que seria meu estudo. Ao longo da semana estudei e apresentei os seguintes artigos:
+- Natural language processing (NLP) in management research: A literature review
+- Topic Modeling: A Comprehensive Review
+- A review of topic modeling methods
+- Evolution of topics in education research: a systematic review using bibliometric analysis
+
+O primeiro artigo se trata de uma visão geral sobre o processamento utilizado no PLN; o segundo faz a diferença dos métodos existentes dentro do modelagem de tópicos com uma breve explicação do funcionamento dos métodos; o terceiro faz expõe mais a fundo sobre modelos de tópicos baseados em LDA; o último artigo se trata do estudo dos tópicos mais quentes sobre as diversas áreas da educação dentre os anos de 2000 até 2018.
+Possíveis temas surgiram para produzir a pesquisa da bolsa a partir desses estudos, o que nos leva a ideia do ambiente que servirá como teste de mais de um tipo de método de modelagem de tópicos para os textos que o usuário trouxer. Atualmente, a interface do ambiente está sendo desenvolvida com linguagens web (HTML, CSS e JavaScript).
