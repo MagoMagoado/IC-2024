@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
 			
 			setTimeout(() => {
 				$(".lines-update").innerHTML = `${linesFiles}`;
-			}, 2000);
+			}, 300);
         }
 
 		//trigger
