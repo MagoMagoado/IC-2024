@@ -39,7 +39,16 @@
             </ul>
         </nav>
         <div id="all-files">
-            <input type="text" class="search" />
+            <div class="search-wrapper">
+                <input class="search" placeholder="Search" />
+                <svg id="search-icon" x="0px" y="0px" viewBox="0 0 24 24">
+                    <g stroke-linecap="square" stroke-linejoin="miter" stroke="currentColor">
+                        <line fill="none" stroke-miterlimit="10" x1="22" y1="22" x2="16.4" y2="16.4"/>
+                        <circle fill="none" stroke="currentColor" stroke-miterlimit="10" cx="10" cy="10" r="9"/>
+                    </g>
+                </svg>
+                <button class="sort" data-sort="name">Sort by data</button>
+            </div>
             <ul class="list">
               <li><p class="name">Guybrush Threepwood</p></li>
               <li><p class="name">Elaine Marley</p></li>
@@ -91,6 +100,9 @@
 
     var listObj = new List('all-files', listOptions);
 
+    $('.search').on('click', function(){
+        $('#search-icon').addClass("search-icon-active");
+    });
     $('.next').on('click', function(){
         $('.pagination .active').next().trigger('click');
     });
