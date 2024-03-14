@@ -53,12 +53,11 @@ padding: 0;
 .navbar__item img:nth-child(1){
     width: 30px;
 }
-.navbar__item:nth-child(2) img{
+.navbar_active{
     padding: 1rem;
     border-radius: 10px;
     background-color: rgba(77, 182, 172, 0.7);
 }
-
 #help_button{
     position: fixed;
     width: 70px;

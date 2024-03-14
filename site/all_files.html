@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="#">
+    <meta name="author" content="Isabella">
+    <meta name="description" content="topic modeling">
+    <meta name="keywords" content="topic modeling">
+    <!-------------------------------------->
+    <link rel="stylesheet" href="css/estilo_esqueleto.css">
+    <link rel="stylesheet" href="css/pageAdd.css">
+    <link rel="stylesheet" href="css/pagination.css">
+    <!-------------------------------------->
+    <script src="js/list.pagination.min.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script> 
+    <script src="js/list-150.min.js"></script>
+</head>
+<body>
+    <header>
+        <p class="typewriter"><b>Topic</b><b>Generation</b></p>
+    </header>
+    <div id="main">
+        <nav class="navbar">
+            <ul class="navbar__menu">
+                <li class="navbar__item">
+                    <a href="index.html" class="navbar__link"><img src="img/home.png" alt="add files"><span>Home</span></a>
+                  </li>
+              <li class="navbar__item">
+                <a href="upload_files.html" class="navbar__link"><img src="img/add.png" alt="add files"><span>Add files</span></a>
+              </li>
+              <li class="navbar__item">
+                <a href="#" class="navbar__link"><img src="img/all-documents2.png" class="navbar_active" alt="all files"></i><span>All files</span></a>        
+              </li>
+              <li class="navbar__item">
+                <a href="#" class="navbar__link"><img src="img/search.png" alt="all files"><span>Search files</span></a>        
+              </li>
+            </ul>
+        </nav>
+        <!-- <ul class="page">
+            <li class="page__btn"><span class="material-icons">
+                <svg xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12">
+                    <g fill="none" fill-rule="evenodd">
+                        <path fill="#23adad" d="M7.41 1.41L6 0 0 6l6 6 1.41-1.41L2.83 6z" />
+                    </g>
+                </svg>
+            </li>
+            <li class="page__numbers"> 1</li>
+            <li class="page__numbers active">2</li>
+            <li class="page__numbers">3</li>
+            <li class="page__numbers">4</li>
+            <li class="page__numbers">5</li>
+            <li class="page__numbers">6</li>
+            <li class="page__dots">...</li>
+            <li class="page__numbers"> 10</li>
+            <li class="page__btn">
+                <svg class="navegation-right" xmlns="http://www.w3.org/2000/svg" width="8" height="12" viewBox="0 0 8 12">
+                    <g fill="none" fill-rule="evenodd">
+                        <path fill="#23adad" d="M7.41 1.41L6 0 0 6l6 6 1.41-1.41L2.83 6z" />
+                    </g>
+                </svg>
+            </li>
+        </ul> -->
+        <div id="all-files">
+            <input type="text" class="search" />
+            <ul class="list">
+              <li><p class="name">Guybrush Threepwood</p></li>
+              <li><p class="name">Elaine Marley</p></li>
+              <li><p class="name">LeChuck</p></li>
+              <li><p class="name">Stan</p></li>
+              <li><p class="name">Voodoo Lady</p></li>
+              <li><p class="name">Herman Toothrot</p></li>
+              <li><p class="name">Meathook</p></li>
+              <li><p class="name">Carla</p></li>
+              <li><p class="name">Otis</p></li>
+              <li><p class="name">Rapp Scallion</p></li>
+              <li><p class="name">Rum Rogers Sr.</p></li>
+              <li><p class="name">Men of Low Moral Fiber</p></li>
+              <li><p class="name">Murray</p></li>
+              <li><p class="name">Cannibals</p></li>
+              <li><p class="name">Tripp</p></li>
+              <li><p class="name">Bob</p></li>
+              <li><p class="name">Jeremy</p></li>
+              <li><p class="name">James</p></li>
+              <li><p class="name">Jimmy</p></li>
+              <li><p class="name">Richard</p></li>
+              <li><p class="name">Daniel</p></li>
+              <li><p class="name">Paul</p></li>
+            </ul>
+            
+            <div class="pagination-wrap">
+                <a class="prev" href="#">
+                    <svg aria-hidden="true" data-prefix="fas" data-icon="angle-left" class="svg-inline--fa fa-angle-left fa-w-8" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path fill="#23adad" d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"></path></svg>
+                </a>
+                <ul class="pagination"></ul>
+                <a class="next" href="#">
+                    <svg aria-hidden="true" data-prefix="fas" data-icon="angle-right" class="svg-inline--fa fa-angle-right fa-w-8" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path fill="#23adad" d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg>
+                </a>
+            </div>
+        </div>
+        
+    </div>
+</body>
+<script>
+    var paginationOptions = {
+        name: "pagination",
+        paginationClass: "pagination"
+    };
+    var listOptions = {
+        valueNames: ['name'],
+        page: 3,
+        pagination: true,
+    };
+
+    var listObj = new List('all-files', listOptions);
+
+    $('.next').on('click', function(){
+        $('.pagination .active').next().trigger('click');
+    });
+
+    $('.prev').on('click', function(){
+        $('.pagination .active').prev().trigger('click');
+    });
+</script>
+</html>

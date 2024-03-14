@@ -1,0 +1,132 @@
+/* :root {
+    --primary: #23adad;
+    --greyLight: #23adade1;
+    --greyLight-2: #cbe0dd;
+    --greyDark: #2d4848;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5rem;
+    margin: 3rem;
+    padding: 0 1.5rem;
+    border-radius: 0.6rem;
+    background: #ffffff;
+    box-shadow: 0 0.8rem 2rem rgba(#5a6181, 0.05);
+}
+
+.page__numbers,
+.page__btn,
+.page__dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.8rem;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.page__dots {
+    width: 2.6rem;
+    height: 2.6rem;
+    color: var(--greyLight);
+    cursor: initial;
+}
+
+.page__numbers {
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 0.4rem;
+}
+
+.page__numbers:hover {
+    color: var(--primary);
+}
+
+.page__numbers.active {
+    color: #ffffff;
+    background: var(--primary);
+    font-weight: 600;
+    border: 1px solid var(--primary);
+}
+
+.page__btn {
+    color: var(--greyLight);
+    pointer-events: none;
+}
+
+.page__btn.active {
+    color: var(--greyDark);
+    pointer-events: initial;
+}
+
+.page__btn.active:hover {
+    color: var(--primary);
+}
+
+.page .navegation-right{
+    transform: rotate(180deg);
+} */
+* :root {
+    --primary: #23adad;
+    --greyLight: #23adade1;
+    --greyLight-2: #cbe0dd;
+    --greyDark: #2d4848;
+}
+
+a {
+    text-decoration: none;
+  }
+
+ul {
+    list-style-type: none;
+}
+.pagination-wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0;
+    border-radius: 0.6rem;
+    background: #ffffff;
+    box-shadow: 0 0.8rem 2rem rgba(#5a6181, 0.05);  
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+.pagination li {
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem 0;
+    font-size: 1.4rem;
+    cursor: pointer;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 0.4rem;
+}
+.pagination li a{
+    color: black;
+}
+.pagination li.active{
+    background-color: #23adade1;
+}
+.pagination li.active a{
+    color: #ffffff;
+    font-weight: 600;
+}
+.pagination-wrap svg{
+    width: 1.3rem;
+    height: 1.3rem;
+    margin: 0 1rem;
+}
