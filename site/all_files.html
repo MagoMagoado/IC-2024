@@ -31,7 +31,7 @@
                 <a href="upload_files.html" class="navbar__link"><img src="img/add.png" alt="add files"><span>Add files</span></a>
               </li>
               <li class="navbar__item">
-                <a href="#" class="navbar__link"><img src="img/all-documents2.png" class="navbar_active" alt="all files"></i><span>All files</span></a>        
+                <a href="#" class="navbar__link"><img src="img/all-documents.png" class="navbar_active" alt="all files"></i><span>All files</span></a>        
               </li>
               <li class="navbar__item">
                 <a href="#" class="navbar__link"><img src="img/search.png" alt="all files"><span>Search files</span></a>        
@@ -49,30 +49,7 @@
                 </svg>
                 <button class="sort" data-sort="name">Sort by data</button>
             </div>
-            <ul class="list">
-              <li><p class="name">Guybrush Threepwood</p></li>
-              <li><p class="name">Elaine Marley</p></li>
-              <li><p class="name">LeChuck</p></li>
-              <li><p class="name">Stan</p></li>
-              <li><p class="name">Voodoo Lady</p></li>
-              <li><p class="name">Herman Toothrot</p></li>
-              <li><p class="name">Meathook</p></li>
-              <li><p class="name">Carla</p></li>
-              <li><p class="name">Otis</p></li>
-              <li><p class="name">Rapp Scallion</p></li>
-              <li><p class="name">Rum Rogers Sr.</p></li>
-              <li><p class="name">Men of Low Moral Fiber</p></li>
-              <li><p class="name">Murray</p></li>
-              <li><p class="name">Cannibals</p></li>
-              <li><p class="name">Tripp</p></li>
-              <li><p class="name">Bob</p></li>
-              <li><p class="name">Jeremy</p></li>
-              <li><p class="name">James</p></li>
-              <li><p class="name">Jimmy</p></li>
-              <li><p class="name">Richard</p></li>
-              <li><p class="name">Daniel</p></li>
-              <li><p class="name">Paul</p></li>
-            </ul>
+            <ul class="list"></ul>
             
             <div class="pagination-wrap">
                 <a class="prev" href="#">
@@ -87,28 +64,5 @@
         
     </div>
 </body>
-<script>
-    var paginationOptions = {
-        name: "pagination",
-        paginationClass: "pagination"
-    };
-    var listOptions = {
-        valueNames: ['name'],
-        page: 3,
-        pagination: true,
-    };
-
-    var listObj = new List('all-files', listOptions);
-
-    $('.search').on('click', function(){
-        $('#search-icon').addClass("search-icon-active");
-    });
-    $('.next').on('click', function(){
-        $('.pagination .active').next().trigger('click');
-    });
-
-    $('.prev').on('click', function(){
-        $('.pagination .active').prev().trigger('click');
-    });
-</script>
+<script src="js/list_values.js"></script>
 </html>
