@@ -61,12 +61,22 @@ listObj.add({
 });
 
 $(document).on('click', '.list li', function() {
+
     $('.list li').css('background-color', '#d6d4d4');
     $(this).css('background-color', '#5279c04d');
     // Captura o conteúdo do atributo 'fulltext' do elemento clicado
     let fulltextValue = $(this).find('.fulltext').text();
-    console.log('Valor do fulltext:', fulltextValue);
 
+    
+    $('.alert').fadeOut(200, function() {
+        setTimeout(function () {
+            $("#full-file").css("display", "flex");
+            $("#full-file").addClass("is-open");
+            $('#full-file p').text(fulltextValue);
+        }, 350);
+    });
 
-    $('#full-file p').text(fulltextValue);
+    setTimeout(function () {
+        $('#full-file p').text(fulltextValue);
+    }, 100);
 });

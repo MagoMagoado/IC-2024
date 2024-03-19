@@ -47,6 +47,20 @@ ul {
     overflow-y: auto;
     scrollbar-width: thin; /* largura da barra de rolagem */
     scrollbar-color: #ccc #f4f4f4; /* cor da barra de rolagem e do polegar */
+    transform: scale(0);
+    display: none;
+}
+.is-open{
+    animation: is-open .45s ease both;
+}
+@keyframes is-open{
+    to {
+        transform: scale(1);
+    }
+}
+.is-open{
+    
+    transform: scale(1);
 }
 #full-file p{
     width: 85%;
@@ -115,6 +129,9 @@ ul {
 .list li{
     background-color: rgb(214, 212, 212);
     margin-top: .3rem; padding: .3rem;
+    cursor: pointer;
+}
+.list li p{
     cursor: pointer;
 }
 .list li:first-child{
