@@ -62,13 +62,14 @@ document.addEventListener("DOMContentLoaded", function () {
 				Object.keys(files).forEach(fileIndex => {
 					let file = files[fileIndex];
 					let fileType = file.type; // Obtém o tipo do arquivo
+					formdata.append('files[]', file);
 
 					// Verifica se o tipo de arquivo é CSV
-					if (fileType === 'text/csv' || file.name.endsWith('.csv')) {
-						formdata.append('files[]', file);
-					} else{
-						console.error('Arquivo não é do tipo csv:', file.name);
-					}
+					// if (fileType === 'text/csv' || file.name.endsWith('.csv')) {
+					// 	formdata.append('files[]', file);
+					// } else{
+					// 	console.error('Arquivo não é do tipo csv:', file.name);
+					// }
 				});
 
 				ajax.open('POST', 'http://localhost/IC-2024/site/php/saveFile.php');
