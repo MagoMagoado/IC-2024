@@ -1,5 +1,5 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const $ = document.querySelector.bind(document);
+document.addEventListener("DOMContentLoaded", function () {
+	const $ = document.querySelector.bind(document);
 	const loadFiles = `
 		<div class="carregandoFiles">
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4335 4335">
@@ -9,19 +9,19 @@ document.addEventListener("DOMContentLoaded", function() {
 		</div>
 		`;
 
-    let App = {};
-    App.init = (function() {
-        //Init
-        function handleFileSelect(evt) {
-            const files = evt.target.files; // FileList object
+	let App = {};
+	App.init = (function () {
+		//Init
+		function handleFileSelect(evt) {
+			const files = evt.target.files; // FileList object
 
-			
+
 			$(".lines-update").innerHTML = loadFiles;
 
 			$("#drop").classList.add("hidden");
 			$("#files-active").classList.remove("hidden");
 
-			
+
 			let linesFiles = `${Object.keys(files)
 				.map(file =>
 					`<div class="linha">
@@ -33,22 +33,73 @@ document.addEventListener("DOMContentLoaded", function() {
 					`)
 				.join("")}`;
 
-			
+
 			Object.keys(files).forEach(file => {
 				let load = 2000 + (file * 2000); // fake load
 				setTimeout(() => {
 					$(".lines-update").innerHTML = `${linesFiles}`;
 				}, load);
 			});
-        }
 
-		
+			//confirm and save
+			$("#confirm-upload-files").addEventListener("click", evt => {
+				evt.preventDefault();
+
+				var ajax = new XMLHttpRequest();
+				var formdata = new FormData();
+
+				ajax.onreadystatechange = function () {
+					if (ajax.status === 200) {
+						if (ajax.readyState === 4) {
+							console.log('OK! Enviado solicitação');
+						}
+					}
+					else {
+						console.error('Error 404 Page Not Found!');
+					}
+				}
+
+				Object.keys(files).forEach(fileIndex => {
+					let file = files[fileIndex];
+					let fileType = file.type; // Obtém o tipo do arquivo
+
+					// Verifica se o tipo de arquivo é CSV
+					if (fileType === 'text/csv' || file.name.endsWith('.csv')) {
+						formdata.append('files[]', file);
+					} else{
+						console.error('Arquivo não é do tipo csv:', file.name);
+					}
+				});
+
+				ajax.open('POST', 'http://localhost/IC-2024/site/php/saveFile.php');
+				ajax.send(formdata);
+
+				ajax.onload = function(){
+					//transforma em JSON
+					let respostaAjax = null;
+					try {
+						respostaAjax = JSON.parse(ajax.responseText);
+						/*respostaAjax tem 2 itens:
+						respostaAjax.ok e respostaAjax.messages*/
+					} catch (e) {
+						console.error('Não conseguiu converter em JSON');
+					};
+					if (respostaAjax) {
+						//if null, não passou pelo php
+						console.log(respostaAjax);
+					}
+				}
+
+			});
+		}
+
+
 
 		//trigger
-        $("#triggerFile").addEventListener("click", evt => {
-            evt.preventDefault();
-            $("input[type=file]").click();
-        });
+		$("#triggerFile").addEventListener("click", evt => {
+			evt.preventDefault();
+			$("input[type=file]").click();
+		});
 		// drop events
 		$("#drop").ondragleave = evt => {
 			$("#drop").classList.remove("active");
@@ -67,14 +118,13 @@ document.addEventListener("DOMContentLoaded", function() {
 		//cancel
 		$("#cancel-upload-files").addEventListener("click", evt => {
 			$(".lines-update").innerHTML = ``;
-            evt.preventDefault();
+			evt.preventDefault();
 			$("#files-active").classList.add("hidden");
 			$("#drop").classList.remove("hidden");
-        });
-
+		});
 
 		// input change
 		$("input[type=file]").addEventListener("change", handleFileSelect);
 
-    })();
+	})();
 });
