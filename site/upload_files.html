@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/estilo_esqueleto.css">
     <link rel="stylesheet" href="css/input_bar.css">
     <link rel="stylesheet" href="css/pageAdd.css">
+    <link rel="stylesheet" href="css/button_alert.css">
     <!-------------------------------------->
     <script type="text/javascript" src="js/upload_files.js"></script>
     <script type="text/javascript" src="js/popUp.js"></script>
@@ -37,34 +38,40 @@
               </li>
             </ul>
         </nav>
-        <div id="upload-files">
-            <div class="titUpLoad">
-                <p>
-                    <span class="up">up</span>
-                    <span>load</span>
-                </p>
+        <div class="center-list">
+            <div class="alert alert--info">
+                <p> <strong>Warning!</strong> Please select a file to see is full text.</p>
             </div>
-            <div id="drop">
-                <img id="icon-upload-file" src="img/icon-upload-file.svg" alt="upload files">
-                <p class="pointer-none"><b style="color: #4db6ac;">Drag and drop</b> files here <br /> or <a href=""
-                        id="triggerFile" style="color: #4db6ac;">browse</a> to begin the upload</p>
-                <input type="file" multiple="multiple"/>
+            <div id="upload-files">
+                <div class="titUpLoad">
+                    <p>
+                        <span class="up">up</span>
+                        <span>load</span>
+                    </p>
+                </div>
+                <div id="drop">
+                    <img id="icon-upload-file" src="img/icon-upload-file.svg" alt="upload files">
+                    <p class="pointer-none"><b style="color: #4db6ac;">Drag and drop</b> files here <br /> or <a href=""
+                            id="triggerFile" style="color: #4db6ac;">browse</a> to begin the upload</p>
+                    <input type="file" multiple="multiple"/>
+                </div>
+                <div id="files-active" class="file hidden">
+                    <p class="titles-file">FILES</p>
+                    <div class="lines-update">
+                        
+                    </div>
+                    <div class="buttons-upload">
+                        <button>
+                            <span id="cancel-upload-files">cancel</span>
+                        </button>
+                        <button>
+                            <span id="confirm-upload-files">confirm files</span>
+                        </button>
+                    </div>
+               </div>
             </div>
-            <div id="files-active" class="file hidden">
-                <p class="titles-file">FILES</p>
-                <div class="lines-update">
-                    
-                </div>
-                <div class="buttons-upload">
-                    <button>
-                        <span id="cancel-upload-files">cancel</span>
-                    </button>
-                    <button>
-                        <span id="confirm-upload-files">confirm files</span>
-                    </button>
-                </div>
-           </div>
         </div>
+        
         <img id="help_button" src="img/help5_2.png" alt="all files">
     </div>
 </body>

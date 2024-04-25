@@ -62,8 +62,6 @@ header {
     grid-area: main;
     background-color: #eaeef6;
     display: grid;
-    grid-template-columns: 100%;
-    grid-template-rows: 100%;
     justify-items: center;
     align-items: center;
 }
