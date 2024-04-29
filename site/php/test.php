@@ -11,7 +11,7 @@ if ($arquivos !== false) {
     // Percorre cada arquivo encontrado
     foreach ($arquivos as $arquivo) {
         // Verifica se o arquivo existe
-        if (file_exists($arquivo)) {
+        if (file_exists($arquivo)) { 
             // Abre o arquivo para leitura
             $fileNameOpen = fopen($arquivo, "r");
 

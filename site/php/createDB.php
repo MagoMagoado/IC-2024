@@ -16,14 +16,14 @@ if ($arquivos !== false) {
                 $query = $conn->query("SHOW TABLES FROM $DBName");
                 $tableExists = $query->rowCount() > 0;
                 if ($tableExists) {
-                    echo "<p>Já existem dados no banco.</p>";
+                    $messages[] = "Já existem dados no banco.";
                     try {
                         $sqlDrop = "DROP TABLE $tableName";
                         $conn->exec($sqlDrop);
-                        echo "<p>Dados excluídos com sucesso!</p>";
+                        $messages[] = "Dados excluídos com sucesso!";
                         exit();
                     } catch (PDOException $e) {
-                        echo "Connection failed: " . $e->getMessage();
+                        $messages[] = "Connection failed: " . $e->getMessage();
                     }
                 } else {
                     // Abre o arquivo em modo leitura
@@ -47,9 +47,9 @@ if ($arquivos !== false) {
                                 }
                                 $sqlTable = rtrim($sqlTable, ", ") . ");";
                                 $conn->exec($sqlTable);
-                                echo '<p>Tabela criada com sucesso!</p>';
+                                $messages[] = 'Tabela criada com sucesso!';
                             } catch (PDOException $e) {
-                                echo "Connection failed: " . $e->getMessage();
+                                $messages[] = "Connection failed: " . $e->getMessage();
                             }
 
                             // Inserir dados
@@ -82,37 +82,37 @@ if ($arquivos !== false) {
                                         }
                                     } catch (PDOException $e) {
                                         // Ignora a linha problemática e continua para a próxima
-                                        echo '<p>Linha ' . $rowCount . ' apresentou problema e foi excluída.</p>';
+                                        $messages[] = 'Linha ' . $rowCount . ' apresentou problema e foi excluída.';
                                         continue;
                                     }
                                 }
 
                                 // Faz commit da transação final
                                 $conn->commit();
-                                echo '<p>Dados inseridos com sucesso!</p>';
+                                $messages[] = 'Dados inseridos com sucesso!';
                             } catch (PDOException $e) {
                                 // Se ocorrer um erro ao preparar a consulta, faz rollback da transação
                                 $conn->rollback();
-                                echo "Connection failed: " . $e->getMessage();
+                                $messages[] = "Connection failed: " . $e->getMessage();
                             }
                         } else {
-                            echo "<p>Não foi possível ler o cabeçalho do csv.</p>";
+                            $messages[] = "Não foi possível ler o cabeçalho do csv.";
                         }
 
                         // Fecha o arquivo após a leitura
                         fclose($fileNameOpen);
                     } else {
-                        echo "<p>Não foi possível ler o csv.</p>";
+                        $messages[] = "Não foi possível ler o csv.";
                     }
                 }
             } else {
-                echo '<p>Não foi possível conectar ao banco MySQL.</p>';
+                $messages[] = 'Não foi possível conectar ao banco MySQL.';
             }
         } else {
-            echo '<p>Arquivo .csv não existe ou o caminho não foi encontrado.</p>';
+            $messages[] = 'Arquivo .csv não existe ou o caminho não foi encontrado.';
         }
     }
 } else {
     // Se nenhum arquivo foi encontrado, exibe uma mensagem
-    echo "Nenhum arquivo encontrado na pasta $diretorio";
+    $messages[] = "Nenhum arquivo encontrado na pasta $diretorio";
 }

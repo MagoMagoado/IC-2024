@@ -62,14 +62,19 @@ document.addEventListener("DOMContentLoaded", function () {
 				Object.keys(files).forEach(fileIndex => {
 					let file = files[fileIndex];
 					let fileType = file.type; // Obtém o tipo do arquivo
-					formdata.append('files[]', file);
 
 					// Verifica se o tipo de arquivo é CSV
-					// if (fileType === 'text/csv' || file.name.endsWith('.csv')) {
-					// 	formdata.append('files[]', file);
-					// } else{
-					// 	console.error('Arquivo não é do tipo csv:', file.name);
-					// }
+					if (fileType === 'text/csv' || file.name.endsWith('.csv')) {
+						formdata.append('files[]', file);
+					} else{
+						ajax.abort();
+						console.error('Arquivo não é do tipo csv:', file.name);
+						$("#mensagens-alerta").innerHTML = `
+						<div class="alert alert--info">
+							<p> <strong>Warning!</strong> Please select a csv file.</p>
+						</div>
+						`;
+					}
 				});
 
 				ajax.open('POST', 'http://localhost/IC-2024/site/php/saveFile.php');
@@ -80,14 +85,41 @@ document.addEventListener("DOMContentLoaded", function () {
 					let respostaAjax = null;
 					try {
 						respostaAjax = JSON.parse(ajax.responseText);
-						/*respostaAjax tem 2 itens:
-						respostaAjax.ok e respostaAjax.messages*/
 					} catch (e) {
+						$("#mensagens-alerta").innerHTML = `
+						<div class="alert alert--error">
+							<p> <strong>Error!</strong> Files couldn't be sent.</p>
+						</div>
+						`;
 						console.error('Não conseguiu converter em JSON');
 					};
 					if (respostaAjax) {
-						//if null, não passou pelo php
-						console.log(respostaAjax);
+						if (respostaAjax.response === 1) {
+							$("#mensagens-alerta").innerHTML = `
+							<div class="alert alert--success">
+								<p> <strong>Success!</strong> files were sent successfully.</p>
+							</div>
+							`;
+							console.log(respostaAjax.message);
+
+							////Muda o botão de cancelar////
+							$("#confirm-upload-files").innerHTML = `return`;
+							$("#confirm-upload-files").addEventListener("click", evt => {
+								$("#mensagens-alerta").innerHTML = ``;
+								$(".lines-update").innerHTML = ``;
+								evt.preventDefault();
+								$("#files-active").classList.add("hidden");
+								$("#drop").classList.remove("hidden");
+							});
+							/////////////////////////////////
+						} else{
+							$("#mensagens-alerta").innerHTML = `
+							<div class="alert alert--error">
+								<p> <strong>Error!</strong> Files couldn't be sent.</p>
+							</div>
+							`;
+							console.error(respostaAjax.message);
+						}
 					}
 				}
 
@@ -119,6 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
 		//cancel
 		$("#cancel-upload-files").addEventListener("click", evt => {
 			$(".lines-update").innerHTML = ``;
+			$("#mensagens-alerta").innerHTML = ``;
 			evt.preventDefault();
 			$("#files-active").classList.add("hidden");
 			$("#drop").classList.remove("hidden");

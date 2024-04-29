@@ -1,5 +1,6 @@
 <?php
-$mensagem = null;
+$messages = array();
+$respostaAjax = 0;
 if (!empty($_FILES['files']['name'])) {
     $files = $_FILES['files'];
 
@@ -17,15 +18,21 @@ if (!empty($_FILES['files']['name'])) {
 
         // Move o arquivo para o diretório de destino
         if (move_uploaded_file($tmp_name, $destinoArquivo . $nomeArquivo)) {
-            $mensagem = "SUCESSO ao salvar os arquivos";
+            $messages[] = "SUCESSO ao salvar os arquivos";
+            $respostaAjax = 1;
             include_once('createDB.php');
         } else {
-            $mensagem = "ERRO ao salvar os arquivos";
+            $messages[] = "ERRO ao salvar os arquivos";
+            $respostaAjax = 0;
         }
     }
 } else {
-    $mensagem = "Nenhum arquivo enviado";
+    $messages[] = "Nenhum arquivo enviado";
+    $respostaAjax = 0;
 }
 
-echo json_encode(array('message' => $mensagem));
+echo json_encode(array(
+    'response' => $respostaAjax,
+    'message' => $messages
+));
 ?>
