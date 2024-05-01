@@ -162,6 +162,43 @@
 #upload-files .buttons-upload button:nth-child(1):hover span{
     color: #fff;
 }
+#upload-files .btnBDexist{
+    border-color: #4CB587;
+    background-color: #4CB587;
+}
+#upload-files .btnBDexist button:nth-child(2){
+    background-color: #4CB587;
+}
+#upload-files .btnBDexist button span{
+    color: #fff;
+}
+#upload-files .btnBDexist button:nth-child(1):hover, #upload-files .btnBDexist button:nth-child(2):hover{
+    border-color: #fff;
+    background-color: #fff;
+}
+#upload-files .btnBDexist button:nth-child(1):hover span, #upload-files .btnBDexist button:nth-child(2):hover span{
+    color: #4CB587;
+}
+.warningBD{
+    margin-top: .6rem;
+    text-align: center;
+    color: #445867;
+}
+.warningBD p{
+    width: 100%;
+    margin: 0; padding: 0;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1em;
+    color: #445867;
+    margin-bottom: .4rem;
+}
+.warningBD svg{
+    margin: 0 !important; padding: 0 !important;
+    width: 30px !important;
+    height: 30px !important;
+    fill: #4CB587;
+  }
 /* ---------------------------------------- */
 .carregandoFiles{
     width: 100%;

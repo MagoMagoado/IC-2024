@@ -1,6 +1,8 @@
 <?php
 $messages = array();
 $respostaAjax = 0;
+$BDjaCriado = 0;
+
 if (!empty($_FILES['files']['name'])) {
     $files = $_FILES['files'];
 
@@ -31,7 +33,8 @@ if (!empty($_FILES['files']['name'])) {
     $respostaAjax = 0;
 }
 
-echo json_encode(array(
+echo json_encode(array(    
+    'BD' => $BDjaCriado,
     'response' => $respostaAjax,
     'message' => $messages
 ));

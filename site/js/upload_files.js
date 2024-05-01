@@ -94,15 +94,17 @@ document.addEventListener("DOMContentLoaded", function () {
 						console.error('Não conseguiu converter em JSON');
 					};
 					if (respostaAjax) {
-						if (respostaAjax.response === 1) {
-							$("#mensagens-alerta").innerHTML = `
-							<div class="alert alert--success">
-								<p> <strong>Success!</strong> files were sent successfully.</p>
-							</div>
-							`;
-							console.log(respostaAjax.message);
-
-							////Muda o botão de cancelar////
+						if (respostaAjax.BD === 0) {
+							if (respostaAjax.response === 1) {
+								$("#mensagens-alerta").innerHTML = `
+								<div class="alert alert--success">
+									<p> <strong>Success!</strong> files were sent successfully.</p>
+								</div>
+								`;
+								console.log(respostaAjax.message);
+	
+								////Muda o botão de cancelar////
+								////Muda o botão de cancelar////
 							$("#confirm-upload-files").innerHTML = `return`;
 							$("#confirm-upload-files").addEventListener("click", evt => {
 								$("#mensagens-alerta").innerHTML = ``;
@@ -111,22 +113,46 @@ document.addEventListener("DOMContentLoaded", function () {
 								$("#files-active").classList.add("hidden");
 								$("#drop").classList.remove("hidden");
 							});
-							/////////////////////////////////
-						} else{
+								/////////////////////////////////
+							} else{
+								$("#mensagens-alerta").innerHTML = `
+								<div class="alert alert--error">
+									<p> <strong>Error!</strong> Files couldn't be sent.</p>
+								</div>
+								`;
+								console.error(respostaAjax.message);
+							}
+						}
+						else {
 							$("#mensagens-alerta").innerHTML = `
-							<div class="alert alert--error">
-								<p> <strong>Error!</strong> Files couldn't be sent.</p>
-							</div>
+								<div class="alert alert--warning">
+									<p> <strong>Warning!</strong> Database already exists.</p>
+								</div>
+								`;
+							$(".lines-update").innerHTML = `
+								<div class="warningBD">
+									<svg class="icon-warning" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+										<path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+									</svg>
+									<p>Warning!</p>
+									Database already exists.<br>
+									Do you want to continue uploading or delete existing files?
+								</div>
 							`;
-							console.error(respostaAjax.message);
+							$(".buttons-upload").classList.add("btnBDexist");
+							$("#confirm-upload-files").addEventListener("click", evt => {
+								evt.preventDefault();
+								formdata.append(1, BDjaCriado);
+								console.log(formdata);
+							});
+
 						}
 					}
 				}
+				//fim ajax.onload
 
 			});
 		}
-
-
 
 		//trigger
 		$("#triggerFile").addEventListener("click", evt => {
@@ -150,12 +176,9 @@ document.addEventListener("DOMContentLoaded", function () {
 		};
 		//cancel
 		$("#cancel-upload-files").addEventListener("click", evt => {
-			$(".lines-update").innerHTML = ``;
-			$("#mensagens-alerta").innerHTML = ``;
-			evt.preventDefault();
-			$("#files-active").classList.add("hidden");
-			$("#drop").classList.remove("hidden");
+			location.reload();
 		});
+
 
 		// input change
 		$("input[type=file]").addEventListener("change", handleFileSelect);

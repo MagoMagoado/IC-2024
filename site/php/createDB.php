@@ -16,12 +16,12 @@ if ($arquivos !== false) {
                 $query = $conn->query("SHOW TABLES FROM $DBName");
                 $tableExists = $query->rowCount() > 0;
                 if ($tableExists) {
+                    $BDjaCriado = 1;
                     $messages[] = "Já existem dados no banco.";
                     try {
                         $sqlDrop = "DROP TABLE $tableName";
                         $conn->exec($sqlDrop);
                         $messages[] = "Dados excluídos com sucesso!";
-                        exit();
                     } catch (PDOException $e) {
                         $messages[] = "Connection failed: " . $e->getMessage();
                     }
