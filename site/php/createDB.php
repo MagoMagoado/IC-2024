@@ -34,8 +34,9 @@ if ($arquivos !== false) {
                         if ($header !== FALSE) {
                             // Sanatiza o cabeçalho e troca espaços por _
                             $header = array_map('sanitize', $header);
-                            $header = array_map(function ($word) {
-                                return str_replace(' ', '_', $word);
+                            $header = array_map(function($word) {
+                                // Substitui espaços por underscores e remove aspas simples
+                                return str_replace([" ", "'"], ["_", ""], $word);
                             }, $header);
 
                             // Irá criar as colunas da tabela

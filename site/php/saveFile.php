@@ -33,6 +33,8 @@ if (!empty($_FILES['files']['name'])) {
     $respostaAjax = 0;
 }
 
+
+
 echo json_encode(array(    
     'BD' => $BDjaCriado,
     'response' => $respostaAjax,

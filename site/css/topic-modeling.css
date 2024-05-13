@@ -1,0 +1,141 @@
+.center-list{
+    width: fit-content;
+    height: fit-content;
+}
+#cards{
+    display: flex;
+}
+#cards div{
+    width: 250px;
+    height: calc(200px * 1.5);
+    border: 1px solid #ffffffcc;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 1rem;
+    margin-right: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #eaeef6;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bolder;
+    font-size: 2rem;
+    text-shadow:
+       3px 3px 0 #222222cc,
+     -1px -1px 0 #222222cc,  
+      1px -1px 0 #222222cc,
+      -1px 1px 0 #222222cc,
+       1px 1px 0 #222222cc;
+    transition: .3s ease;
+}
+#cards div:hover{
+    transform: scale(1.03);
+    background-color: #5f86ce;
+    color: #eaeef6;;
+    text-shadow:
+        3px 3px 0 #000,
+        -1px -1px 0 #000,  
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+    cursor: pointer;
+}
+#painelEscolha{
+    width: 35vw;
+    height: 70vh;
+    border-radius: 5px;
+    background-color: #5f86ce;
+}
+#infosCorpus p{
+    display: flex;
+    flex-direction: column;
+    cursor: default;
+    color: #fff;
+    align-items: center;
+}
+#quantFiles{
+    width: 50px; height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    background-color: rgba(16, 16, 16, 0.35);
+    border: 1px solid rgba(170, 170, 170, 0.6);
+    font-family: mukta-bold;
+    font-size: .9rem;
+    padding: 0; margin: 0 !important;
+    color: #fff;
+    white-space: nowrap;
+}
+.buttonsTutorial{
+    display: flex;
+    justify-content: space-evenly;
+}
+.buttonsTutorial button{
+
+    transition: all 0.25s cubic-bezier(0.65, 0, 0.076, 1);
+    width: 200px;
+    padding: .3rem .4rem;
+    border: 2px solid #ffffff;
+    border-radius: 2rem;
+    background-color: transparent;
+    cursor: pointer;
+}
+.buttonsTutorial span{
+    transition: all 0.25s cubic-bezier(0.65, 0, 0.076, 1);
+    color: #ffffff;
+    font-size: 1rem;
+    font-family: mukta-medium;
+    text-align: center;
+    text-transform: uppercase;
+}
+.buttonsTutorial button:hover{
+    background-color: #fff;
+    color: #5279c0;
+}
+.buttonsTutorial button:hover span{
+    color: #5279c0;
+    font-family: mukta;
+    font-weight: bold;
+}
+.inputs{
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+}
+.inputs label{
+    color: #fff;
+    text-transform: lowercase;
+    font-family: roboto-light;
+    font-size: .8rem;
+}
+.inputs label::after{
+    content: '*';
+    color: rgb(235, 169, 169);
+    font-family: mukta-bold;
+}
+.inputs input{ 
+	width: 2rem;
+	background: rgba(0,0,0,0.3);
+	border: none;
+	outline: none;
+	padding: 10px;
+	font-size: 13px;
+	color: #fff;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+	border: 1px solid rgba(0,0,0,0.3);
+	border-radius: 4px;
+	box-shadow: inset 0 -5px 45px rgba(100,100,100,0.2), 0 1px 1px rgba(255,255,255,0.2);
+	-webkit-transition: box-shadow .5s ease;
+	-moz-transition: box-shadow .5s ease;
+	-o-transition: box-shadow .5s ease;
+	-ms-transition: box-shadow .5s ease;
+	transition: box-shadow .5s ease;
+}
+.inputs input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+.inputs input:focus{box-shadow: inset 0 -5px 45px rgb(53, 53, 53), 0 1px 1px rgba(255,255,255,0.5);}
+#getResult{
+    display: none;
+}

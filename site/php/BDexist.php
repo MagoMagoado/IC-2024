@@ -1,19 +1,20 @@
 <?php
 include_once('conexaoDB.php');
-$BDjaCriado = 0;
 $tableName = 'tabela_' . $DBName;
+$BDjaCriado = NULL;
 
-if (isset($conn)) {
+try {
     $query = $conn->query("SHOW TABLES FROM $DBName");
     $tableExists = $query->rowCount() > 0;
     if ($tableExists) {
         $messages[] = "Já existem dados no banco.";
         $BDjaCriado = 1;
     }
+    else{
+        $BDjaCriado = 0;
+    }
 }
-
-echo json_encode(array(    
-    'BD' => $BDjaCriado,
-    'message' => $messages
-));
+catch (PDOException $e) {
+    echo ("Connection failed: " . $e->getMessage());
+}
 ?>

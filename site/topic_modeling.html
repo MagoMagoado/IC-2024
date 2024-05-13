@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/estilo_esqueleto.css">
     <link rel="stylesheet" href="css/input_bar.css">
     <link rel="stylesheet" href="css/pageAdd.css">
+    <link rel="stylesheet" href="css/topic-modeling.css">
     <!-------------------------------------->
     <script type="text/javascript" src="js/upload_files.js"></script>
     <script type="text/javascript" src="js/popUp.js"></script>
@@ -38,6 +39,42 @@
             </ul>
         </nav>
         <div class="center-list">
+            <!-- <div id="cards">
+                <div>LDA</div>
+                <div>LSA</div>
+                <div>Word2Vec</div>
+            </div> -->
+            <div id="painelEscolha">
+                <div id="infosCorpus">
+                    <p>Total of files in<span id="quantFiles">4000</span></p>
+                </div>
+                <div class="buttonsTutorial">
+                    <button id="cleanCorpus">
+                        <span>clean corpus</span>
+                    </button>
+                    <button id="lemmaCorpus">
+                        <span>lemmatize corpus</span>
+                    </button>
+                </div>
+                <div class="inputs">
+                    <label for="topics">Topics </label>
+                    <input type="number" name="topics" id="topics">
+                </div>
+                <div class="inputs">
+                    <label for="words">Words </label>
+                    <input type="number" name="words" id="words">
+                </div>
+                <div class="inputs">
+                    <label for="interaction">Interaction </label>
+                    <input type="number" name="interaction" id="interaction">
+                </div>
+                <button id="generateTopics">
+                    generate topics
+                </button>
+                <button id="getResult">
+                    get the result
+                </button>
+            </div>
         </div>
     </div>
 </body>
