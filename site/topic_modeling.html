@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/input_bar.css">
     <link rel="stylesheet" href="css/pageAdd.css">
     <link rel="stylesheet" href="css/topic-modeling.css">
+    <link rel="stylesheet" href="css/button_alert.css">
     <!-------------------------------------->
     <script type="text/javascript" src="js/upload_files.js"></script>
     <script type="text/javascript" src="js/popUp.js"></script>
@@ -31,10 +32,10 @@
                 <a href="upload_files.html" class="navbar__link"><img src="img/add.png" alt="add files"><span>Add files</span></a>
               </li>
               <li class="navbar__item">
-                <a href="all_files.html" class="navbar__link"><img src="img/all-documents.png" alt="all files"></i><span>All files</span></a>        
+                <a href="all_files.html" class="navbar__link"><img src="img/all-documents.png" alt="all files"></i><span>All files</span></a>
               </li>
               <li class="navbar__item">
-                <a href="#" class="navbar__link"><img src="img/deep-learning3.png" class="navbar_active" alt="all files"><span>Topic modeling</span></a>        
+                <a href="#" class="navbar__link"><img src="img/deep-learning3.png" class="navbar_active" alt="all files"><span>Topic modeling</span></a>
               </li>
             </ul>
         </nav>
@@ -44,45 +45,93 @@
                 <div>LSA</div>
                 <div>Word2Vec</div>
             </div> -->
+            <div id="mensagens-alerta">
+                <div class="alert alert--success">
+                    <p> <strong>Success!</strong> files were sent successfully.</p>
+                </div>
+            </div>
             <div id="painelEscolha">
                 <div id="infosCorpus">
+                    <p>Please enter the fields below to generate the model results</p>
                     <p>Total of files in<span id="quantFiles">4000</span></p>
                 </div>
-                <div class="buttonsTutorial">
-                    <button id="cleanCorpus">
-                        <span>clean corpus</span>
-                    </button>
-                    <button id="lemmaCorpus">
-                        <span>lemmatize corpus</span>
-                    </button>
-                </div>
-                <div class="inputs">
-                    <label for="topics">Topics </label>
-                    <input type="number" name="topics" id="topics">
-                </div>
-                <div class="inputs">
-                    <label for="words">Words </label>
-                    <input type="number" name="words" id="words">
-                </div>
-                <div class="inputs">
-                    <label for="interaction">Interaction </label>
-                    <input type="number" name="interaction" id="interaction">
-                </div>
-                <button id="generateTopics">
-                    generate topics
-                </button>
+                <form id="formulario" method="post">
+                    <div class="buttons">
+                        <button type="button" id="cleanCorpus" value="0">
+                            <span>clean corpus</span>
+                        </button>
+                        <button type="button" id="lemmaCorpus" value="0">
+                            <span>lemmatize corpus</span>
+                        </button>
+                    </div>
+                    <div class="inputs">
+                        <label for="topics">Topics </label>
+                        <input type="number" name="topics" id="topics" required>
+                    </div>
+                    <div class="inputs">
+                        <label for="words">Words </label>
+                        <input type="number" name="words" id="words" required>
+                    </div>
+                    <div class="inputs">
+                        <label for="interaction">Interaction </label>
+                        <input type="number" name="interaction" id="interaction">
+                    </div>
+                    <input id="generateTopics" type="submit" value="generate topics" />
+                </form>
                 <button id="getResult">
                     get the result
                 </button>
-            </div>
+            </duv>
         </div>
     </div>
 </body>
-<div class="pop-up">
-    <div class="box-popUp">
-        <button>x</button>
-        <div>Como usar?</div>
-        <p>Watch the following video to understand how to use Topic Generation.</p>
-    </div>
-</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    function toggleButton(button) {
+        if (button.value === "0") {
+            button.style.backgroundColor = "#fff";
+            button.style.borderColor = "#fff";
+            $(button).find("span").css("font-family", "mukta");
+            $(button).find("span").css("font-weight", "bold");
+            $(button).find("span").css("color", "#5279c0");
+            button.value = "1";
+        } else {
+            button.style.backgroundColor = "transparent";
+            button.style.borderColor = "#abc1e7";
+            $(button).find("span").css("font-family", "mukta-medium");
+            $(button).find("span").css("font-weight", "unset");
+            $(button).find("span").css("color", "#abc1e7");
+            button.value = "0";
+        }
+    }
+    $("#cleanCorpus, #lemmaCorpus").on("click", function() {
+        $(this).toggleClass("hovered");
+        toggleButton(this);
+    });
+    $("#formulario").submit(function (event) {
+        event.preventDefault();
+        console.log($("#cleanCorpus").val()); console.log($("#lemmaCorpus").val());
+        $("#generateTopics").prop("disabled", true);
+        var formData = new FormData(this);
+        formData.append("cleanCorpus", $("#cleanCorpus").val());
+        formData.append("lemmaCorpus", $("#lemmaCorpus").val());
+        formData.append("typeModeling", "1");
+        var url = 'http://localhost/IC-2024/site/php/modelingLDA.php';
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: formData,
+            processData: false, // Impede o jQuery de tentar serializar o formData
+            contentType: false, // Impede o jQuery de definir o tipo de conteúdo
+            success: function (data) {
+                console.log(data);
+                $("#generateTopics").prop("disabled", false);
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+</script>
 </html>

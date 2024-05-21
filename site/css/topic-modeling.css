@@ -40,20 +40,29 @@
     cursor: pointer;
 }
 #painelEscolha{
-    width: 35vw;
-    height: 70vh;
-    border-radius: 5px;
+    width: 15vw;
+    height: 45vh;
+    padding: 20px;
+    border-radius: 20px;
     background-color: #5f86ce;
 }
 #infosCorpus p{
+    width: 100%;
     display: flex;
-    flex-direction: column;
     cursor: default;
-    color: #fff;
+    color: #f0f0f0;
     align-items: center;
 }
+#infosCorpus p:nth-child(1){
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+#infosCorpus p:nth-child(2){
+    margin: 10px 0 20px 0;
+}
 #quantFiles{
-    width: 50px; height: 50px;
+    width: 40px; height: 40px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -62,64 +71,76 @@
     background-color: rgba(16, 16, 16, 0.35);
     border: 1px solid rgba(170, 170, 170, 0.6);
     font-family: mukta-bold;
-    font-size: .9rem;
-    padding: 0; margin: 0 !important;
+    font-size: .8rem;
+    padding: 0; margin: 0 0 0 4px;
     color: #fff;
     white-space: nowrap;
 }
-.buttonsTutorial{
+.buttons{
     display: flex;
     justify-content: space-evenly;
+    width: 100%;
+    margin-bottom: 20px;
 }
-.buttonsTutorial button{
-
+.buttons button{
     transition: all 0.25s cubic-bezier(0.65, 0, 0.076, 1);
-    width: 200px;
-    padding: .3rem .4rem;
-    border: 2px solid #ffffff;
+    width: 130px;
+    padding: .1rem .2rem;
+    border: 2px solid #abc1e7;
     border-radius: 2rem;
     background-color: transparent;
     cursor: pointer;
 }
-.buttonsTutorial span{
+.buttons span{
     transition: all 0.25s cubic-bezier(0.65, 0, 0.076, 1);
-    color: #ffffff;
-    font-size: 1rem;
+    color: #abc1e7;
+    font-size: .85rem;
     font-family: mukta-medium;
     text-align: center;
     text-transform: uppercase;
 }
-.buttonsTutorial button:hover{
+.buttons button:hover, .buttons button.hovered {
     background-color: #fff;
+    border-color: #fff;
     color: #5279c0;
 }
-.buttonsTutorial button:hover span{
+
+.buttons button:hover span, .buttons button.hovered span {
     color: #5279c0;
     font-family: mukta;
     font-weight: bold;
 }
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 .inputs{
     display: flex;
     flex-direction: column;
-    width: 45%;
+    width: 35%;
 }
 .inputs label{
     color: #fff;
     text-transform: lowercase;
     font-family: roboto-light;
     font-size: .8rem;
+    width: fit-content;
 }
 .inputs label::after{
     content: '*';
+    width: fit-content;
     color: rgb(235, 169, 169);
     font-family: mukta-bold;
 }
 .inputs input{ 
-	width: 2rem;
+    box-sizing: border-box;
+	width: 100%;
 	background: rgba(0,0,0,0.3);
 	border: none;
 	outline: none;
-	padding: 10px;
+	padding: 8px 0 8px 8px;
 	font-size: 13px;
 	color: #fff;
 	text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
