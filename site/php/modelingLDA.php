@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $shell = "python {$path} $clean $lemma $topics $words $interaction $typeModeling";
     $cmdResult = exec($shell);
     
-    #pode retornar 4 coisas: Erro SQL - Erro LDA - Erro EXCEL - OK
+    #pode retornar 4 coisas: Erro SQL - Erro LDA - Erro EXCEL - OK + 'caminho do arquivo'
     echo $cmdResult;
 } else {
     echo "nada recebido!";

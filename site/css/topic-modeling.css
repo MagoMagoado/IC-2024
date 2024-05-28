@@ -157,6 +157,35 @@ form{
     -webkit-appearance: none;
 }
 .inputs input:focus{box-shadow: inset 0 -5px 45px rgb(53, 53, 53), 0 1px 1px rgba(255,255,255,0.5);}
-#getResult{
-    display: none;
+
+#generateTopics {
+    transition: all 0.25s cubic-bezier(0.65, 0, 0.076, 1);
+    font-size: .9rem;
+    font-family: mukta;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    width: fit-content;
+    margin-top: 1.5rem;
+    padding: .1rem .8rem;
+    background-color: #5279c0;
+    box-sizing: border-box;
+    border-radius: 2rem;
+    border: 1px solid #5279c0;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 1px -2px,rgba(0, 0, 0, .14) 0 2px 2px 0,rgba(0, 0, 0, .12) 0 1px 5px 0;
+    color: #fff;
+    cursor: pointer;
+}
+#generateTopics:hover{
+    background-color: #274274;
+    border-color: #274274;
+    box-shadow: rgba(0, 0, 0, .2) 0 2px 4px -1px, rgba(0, 0, 0, .14) 0 4px 5px 0, rgba(0, 0, 0, .12) 0 1px 10px 0;
+}
+.disableButton{
+    background-color: #cccccc !important;
+    border-color: #cccccc !important;
+    color: #969696 !important;
+    font-family: inherit;
+    cursor: default !important;
+    box-shadow: none !important;
 }

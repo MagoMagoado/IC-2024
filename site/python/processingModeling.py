@@ -156,7 +156,9 @@ if(typeModeling == '1'):
         output_path = os.path.join(dir, excel_file)
         try:
             df_export.to_excel(output_path, index=False)
-            print("OK")
+
+            #se tudo der certo, retorna caminho do arquivo
+            print(output_path)
         except Error as e:
             print("Erro EXCEL")
             exit()

@@ -46,14 +46,14 @@
                 <div>Word2Vec</div>
             </div> -->
             <div id="mensagens-alerta">
-                <div class="alert alert--success">
-                    <p> <strong>Success!</strong> files were sent successfully.</p>
+                <div class="alert alert--info">
+                    <p> <strong>Warning!</strong> Please fill in all the fields.</p>
                 </div>
             </div>
             <div id="painelEscolha">
                 <div id="infosCorpus">
                     <p>Please enter the fields below to generate the model results</p>
-                    <p>Total of files in<span id="quantFiles">4000</span></p>
+                    <p>Total of files in<span id="quantFiles"></span></p>
                 </div>
                 <form id="formulario" method="post">
                     <div class="buttons">
@@ -78,15 +78,32 @@
                     </div>
                     <input id="generateTopics" type="submit" value="generate topics" />
                 </form>
-                <button id="getResult">
-                    get the result
-                </button>
             </duv>
         </div>
     </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
+    window.addEventListener("DOMContentLoaded", function() {
+        var url = 'http://localhost/IC-2024/site/php/countFiles.php';
+        $.ajax({
+            type: 'POST',
+            url: url,
+            processData: false, // Impede o jQuery de tentar serializar o formData
+            contentType: false, // Impede o jQuery de definir o tipo de conteúdo
+            success: function (data) {
+                $("#quantFiles").html(data);
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    });
+
+    $("#cleanCorpus, #lemmaCorpus").on("click", function() {
+        $(this).toggleClass("hovered");
+        toggleButton(this);
+    });
     function toggleButton(button) {
         if (button.value === "0") {
             button.style.backgroundColor = "#fff";
@@ -110,9 +127,9 @@
     });
     $("#formulario").submit(function (event) {
         event.preventDefault();
-        console.log($("#cleanCorpus").val()); console.log($("#lemmaCorpus").val());
         $("#generateTopics").prop("disabled", true);
-        var formData = new FormData(this);
+        $("#generateTopics").addClass("disableButton");
+        let formData = new FormData(this);
         formData.append("cleanCorpus", $("#cleanCorpus").val());
         formData.append("lemmaCorpus", $("#lemmaCorpus").val());
         formData.append("typeModeling", "1");
@@ -125,10 +142,38 @@
             processData: false, // Impede o jQuery de tentar serializar o formData
             contentType: false, // Impede o jQuery de definir o tipo de conteúdo
             success: function (data) {
-                console.log(data);
                 $("#generateTopics").prop("disabled", false);
+                $("#generateTopics").removeClass("disableButton");
+                $("#mensagens-alerta").html(`
+                    <div class="alert alert--success">
+                        <p> <strong>Success!</strong> Process completed successfully.</p>
+                    </div>
+                `);
+
+                try {
+                    let filePath = "http://localhost/IC-2024/site/exportExcel/lda.xlsx";
+                    let link = document.createElement('a');
+                    link.href = filePath;
+                    link.download = 'lda.xlsx';
+
+                    // Adicionar o link ao corpo do documento
+                    document.body.appendChild(link);
+
+                    // Simular um clique no link
+                    link.click();
+
+                    // Remover o link do documento
+                    document.body.removeChild(link);
+                } catch (error) {
+                    console.error('Erro:', error);
+                }
             },
             error: function (xhr, status, error) {
+                $("#mensagens-alerta").html(`
+                    <div class="alert alert--error">
+                        <p> <strong>Error!</strong> Something went wrong.</p>
+                    </div>
+                `);
                 console.error(xhr.responseText);
             }
         });
