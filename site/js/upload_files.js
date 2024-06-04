@@ -12,8 +12,161 @@ document.addEventListener("DOMContentLoaded", function () {
 	let App = {};
 	App.init = (function () {
 		//Init
+
+		function callAjax(files, valueBDjaCriado) {
+			var ajax = new XMLHttpRequest();
+			var formdata = new FormData();
+
+			ajax.onreadystatechange = function () {
+				if (ajax.status === 200) {
+					if (ajax.readyState === 4) {
+						console.log('OK! Enviado solicitação');
+					}
+				}
+				else {
+					console.error('Error 404 Page Not Found!');
+				}
+			}
+
+			Object.keys(files).forEach(fileIndex => {
+				let file = files[fileIndex];
+				let fileType = file.type; // Obtém o tipo do arquivo
+
+				// Verifica se o tipo de arquivo é CSV
+				if (fileType === 'text/csv' || file.name.endsWith('.csv')) {
+					formdata.append('files[]', file);
+				} else{
+					ajax.abort();
+					console.error('Arquivo não é do tipo csv:', file.name);
+					$("#mensagens-alerta").innerHTML = `
+					<div class="alert alert--info">
+						<p> <strong>Warning!</strong> Please select a csv file.</p>
+					</div>
+					`;
+				}
+			});
+
+			formdata.append('BDjaCriado', valueBDjaCriado);
+			ajax.open('POST', 'http://localhost/IC-2024/site/php/saveFile.php');
+			ajax.send(formdata);
+
+			ajax.onload = function(){
+				//transforma em JSON
+				let respostaAjax = null;
+				try {
+					respostaAjax = JSON.parse(ajax.responseText);
+				} catch (e) {
+					$("#mensagens-alerta").innerHTML = `
+					<div class="alert alert--error">
+						<p> <strong>Error!</strong> Files couldn't be sent.</p>
+					</div>
+					`;
+					console.error('Não conseguiu converter em JSON');
+				};
+				if (respostaAjax) {
+					if (respostaAjax.columnsName.length > 1) {
+						$("#mensagens-alerta").innerHTML = `
+							<div class="alert alert--warning">
+								<p><strong>Warning!</strong> More than one column exists.</p>
+							</div>
+						`;
+						let options = respostaAjax.columnsName.map(x => `<option value="${x}">${x}</option>`).join('');
+						$(".lines-update").innerHTML = `
+							<div class="warningBD">
+								<div class="warningColumns">
+									<svg class="icon-warning" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+										<path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+									</svg>
+									<p>Warning!</p>
+									More than one column exists.<br>
+									Please select one column only.
+									<select id="selectColumn">
+										${options}
+									</select>
+								</div>
+							</div>
+						`;
+						$("#confirm-upload-files").classList.add("hidden");
+						$("#columnConfirm-upload-files").classList.remove("hidden");
+			
+						$("#columnConfirm-upload-files").addEventListener("click", evt => {
+							evt.preventDefault();
+							let selectColumn = ($("#selectColumn").value);
+							
+							if (respostaAjax.BD === 1) {
+								htmlBDExist(respostaAjax);
+							} else{
+								console.log("bd NÃO existe!");
+							}
+						});						
+					} else{
+						htmlSuccessAndFailed(respostaAjax);
+					}
+				}
+			}
+			//fim ajax.onload
+			
+			function htmlBDExist(respostaAjax) {
+				$("#mensagens-alerta").innerHTML = `
+					<div class="alert alert--warning">
+						<p> <strong>Warning!</strong> Database already exists.</p>
+					</div>
+					`;
+				$(".lines-update").innerHTML = `
+					<div class="warningBD">
+						<svg class="icon-warning" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+							<path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+						</svg>
+						<p>Warning!</p>
+						Database already exists.<br>
+						Do you want to continue uploading or delete existing files?
+					</div>
+				`;
+
+				//Alterando botões
+				$(".buttons-upload").classList.add("btnBDexist");
+				//
+				$("#cancel-upload-files").classList.add("hidden");
+				$("#delete-upload-files").classList.remove("hidden");
+				//
+				$("#confirm-upload-files").classList.add("hidden");
+				$("#columnConfirm-upload-files").classList.add("hidden");
+				$("#continue-upload-files").classList.remove("hidden");
+				//
+				$("#continue-upload-files").addEventListener("click", evt => {
+					evt.preventDefault();
+					callAjax(files, 2);
+				});
+			}
+			function htmlSuccessAndFailed(respostaAjax) {
+				if (respostaAjax.response === 1) {
+					$("#mensagens-alerta").innerHTML = `
+					<div class="alert alert--success">
+						<p> <strong>Success!</strong> files were sent successfully.</p>
+					</div>
+					`;
+					console.log(respostaAjax.message);
+
+					////Muda o botão de cancelar////
+				$("#confirm-upload-files").classList.add("hidden");
+				$("#return-upload-files").classList.remove("hidden");
+				$("#return-upload-files").addEventListener("click", evt => {
+					location.reload();
+				});
+					/////////////////////////////////
+				} else{
+					$("#mensagens-alerta").innerHTML = `
+					<div class="alert alert--error">
+						<p> <strong>Error!</strong> Files couldn't be sent.</p>
+					</div>
+					`;
+					console.error(respostaAjax.message);
+				}
+			}
+
+		}
 		function handleFileSelect(evt) {
-			const files = evt.target.files; // FileList object
+			var files = evt.target.files; // FileList object
 
 
 			$(".lines-update").innerHTML = loadFiles;
@@ -44,113 +197,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			//confirm and save
 			$("#confirm-upload-files").addEventListener("click", evt => {
 				evt.preventDefault();
-
-				var ajax = new XMLHttpRequest();
-				var formdata = new FormData();
-
-				ajax.onreadystatechange = function () {
-					if (ajax.status === 200) {
-						if (ajax.readyState === 4) {
-							console.log('OK! Enviado solicitação');
-						}
-					}
-					else {
-						console.error('Error 404 Page Not Found!');
-					}
-				}
-
-				Object.keys(files).forEach(fileIndex => {
-					let file = files[fileIndex];
-					let fileType = file.type; // Obtém o tipo do arquivo
-
-					// Verifica se o tipo de arquivo é CSV
-					if (fileType === 'text/csv' || file.name.endsWith('.csv')) {
-						formdata.append('files[]', file);
-					} else{
-						ajax.abort();
-						console.error('Arquivo não é do tipo csv:', file.name);
-						$("#mensagens-alerta").innerHTML = `
-						<div class="alert alert--info">
-							<p> <strong>Warning!</strong> Please select a csv file.</p>
-						</div>
-						`;
-					}
-				});
-
-				ajax.open('POST', 'http://localhost/IC-2024/site/php/saveFile.php');
-				ajax.send(formdata);
-
-				ajax.onload = function(){
-					//transforma em JSON
-					let respostaAjax = null;
-					try {
-						respostaAjax = JSON.parse(ajax.responseText);
-					} catch (e) {
-						$("#mensagens-alerta").innerHTML = `
-						<div class="alert alert--error">
-							<p> <strong>Error!</strong> Files couldn't be sent.</p>
-						</div>
-						`;
-						console.error('Não conseguiu converter em JSON');
-					};
-					if (respostaAjax) {
-						if (respostaAjax.BD === 0) {
-							if (respostaAjax.response === 1) {
-								$("#mensagens-alerta").innerHTML = `
-								<div class="alert alert--success">
-									<p> <strong>Success!</strong> files were sent successfully.</p>
-								</div>
-								`;
-								console.log(respostaAjax.message);
-	
-								////Muda o botão de cancelar////
-								////Muda o botão de cancelar////
-							$("#confirm-upload-files").innerHTML = `return`;
-							$("#confirm-upload-files").addEventListener("click", evt => {
-								$("#mensagens-alerta").innerHTML = ``;
-								$(".lines-update").innerHTML = ``;
-								evt.preventDefault();
-								$("#files-active").classList.add("hidden");
-								$("#drop").classList.remove("hidden");
-							});
-								/////////////////////////////////
-							} else{
-								$("#mensagens-alerta").innerHTML = `
-								<div class="alert alert--error">
-									<p> <strong>Error!</strong> Files couldn't be sent.</p>
-								</div>
-								`;
-								console.error(respostaAjax.message);
-							}
-						}
-						else {
-							$("#mensagens-alerta").innerHTML = `
-								<div class="alert alert--warning">
-									<p> <strong>Warning!</strong> Database already exists.</p>
-								</div>
-								`;
-							$(".lines-update").innerHTML = `
-								<div class="warningBD">
-									<svg class="icon-warning" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-										<path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
-									</svg>
-									<p>Warning!</p>
-									Database already exists.<br>
-									Do you want to continue uploading or delete existing files?
-								</div>
-							`;
-							$(".buttons-upload").classList.add("btnBDexist");
-							$("#confirm-upload-files").addEventListener("click", evt => {
-								evt.preventDefault();
-								formdata.append(1, BDjaCriado);
-								console.log(formdata);
-							});
-
-						}
-					}
-				}
-				//fim ajax.onload
-
+				callAjax(files, 0);
 			});
 		}
 
