@@ -1,5 +1,6 @@
 <?php
 $messages = array();
+$messagesError = array();
 //resposta Ajax vai ser 0 se der erro ou se BD já existe
 $respostaAjax = 0;
 //BDjaCriado = 0: BD não existe
@@ -42,12 +43,12 @@ if($BDjaCriado === '2' || $BDjaCriado === '3') {
                 $respostaAjax = 1;
                 include_once('test.php');
             } else {
-                $messages[] = "ERRO ao salvar os arquivos";
+                $messageError[] = "Error when saving files";
                 $respostaAjax = 0;
             }
         }
     } else {
-        $messages[] = "Nenhum arquivo enviado";
+        $messageError[] = "No files sent";
         $respostaAjax = 0;
     }
 }
@@ -57,6 +58,7 @@ echo json_encode(array(
     'columnsName' => $header,
     'response' => $respostaAjax,
     '$columnDrop' => $columnDrop,
-    'message' => $messages
+    'message' => $messages,
+    'messageError' => $messagesError
 ));
 ?>

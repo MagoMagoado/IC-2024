@@ -23,7 +23,8 @@ if ($arquivos !== false) {
                         $conn->exec($sqlDrop);
                         $messages[] = "Dados excluidos com sucesso!";
                     } catch (PDOException $e) {
-                        $messages[] = "Connection failed: " . $e->getMessage();
+                        $messagesError[] = "Failed to drop auxiliary table: " . $e->getMessage();
+                        $respostaAjax = 0;
                     }
                 }
                 // Abre o arquivo em modo leitura
@@ -50,7 +51,8 @@ if ($arquivos !== false) {
                             $conn->exec($sqlTable);
                             $messages[] = 'Tabela auxiliar criada com sucesso!';
                         } catch (PDOException $e) {
-                            $messages[] = "Connection failed: " . $e->getMessage();
+                            $messagesError[] = "Failed to create auxiliary table: " . $e->getMessage();
+                            $respostaAjax = 0;
                         }
 
                         // Inserir dados
@@ -83,6 +85,7 @@ if ($arquivos !== false) {
                                     }
                                 } catch (PDOException $e) {
                                     // Ignora a linha problemática e continua para a próxima
+                                    // ESSE ERRO PASSA
                                     $messages[] = 'Linha ' . $rowCount . ' apresentou problema e foi excluida.';
                                     continue;
                                 }
@@ -94,25 +97,31 @@ if ($arquivos !== false) {
                         } catch (PDOException $e) {
                             // Se ocorrer um erro ao preparar a consulta, faz rollback da transação
                             $conn->rollback();
-                            $messages[] = "Connection failed: " . $e->getMessage();
+                            $messageError[] = "Transaction insertion failed: " . $e->getMessage();
+                            $respostaAjax = 0;
                         }
                     } else {
-                        $messages[] = "Não foi possível ler o cabeçalho do csv.";
+                        $messageError[] = "Unable to read csv header";
+                        $respostaAjax = 0;
                     }
 
                     // Fecha o arquivo após a leitura
                     fclose($fileNameOpen);
                 } else {
-                    $messages[] = "Não foi possível ler o csv.";
+                    $messagesError[] = "Unable to read csv";
+                    $respostaAjax = 0;
                 }
             } else {
-                $messages[] = 'Não foi possível conectar ao banco MySQL.';
+                $messagesError[] = 'Unable to connect to MySQL database';
+                $respostaAjax = 0;
             }
         } else {
-            $messages[] = 'Arquivo .csv não existe ou o caminho não foi encontrado.';
+            $messagesError[] = 'csv file does not exist or path was not found';
+            $respostaAjax = 0;
         }
     }
 } else {
     // Se nenhum arquivo foi encontrado, exibe uma mensagem
-    $messages[] = "Nenhum arquivo encontrado na pasta $diretorio";
+    $messagesError[] = "No files found in folder $diretorio";
+    $respostaAjax = 0;
 }

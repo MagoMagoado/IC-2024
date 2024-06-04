@@ -156,14 +156,6 @@ document.addEventListener("DOMContentLoaded", function () {
 					</div>
 					`;
 					console.log(respostaAjax.message);
-
-					////Muda o botão de cancelar////
-				$("#confirm-upload-files").classList.add("hidden");
-				$("#return-upload-files").classList.remove("hidden");
-				$("#return-upload-files").addEventListener("click", evt => {
-					location.reload();
-				});
-					/////////////////////////////////
 				} else{
 					$("#mensagens-alerta").innerHTML = `
 					<div class="alert alert--error">

@@ -16,7 +16,7 @@ try {
     }
 }
 catch (PDOException $e) {
-    $messages[] = "Testing if data already exists failed: " . $e->getMessage();
+    $messageError[] = "Testing if data already exists failed: " . $e->getMessage();
     $respostaAjax = 0;
 }
 ?>

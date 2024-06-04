@@ -12,7 +12,7 @@ try{
             $messages[] = "$table2 truncada com sucesso!";
         }
         catch (PDOException $e) {
-            $messages[] = "Failed to truncate table: " . $e->getMessage();
+            $messageError[] = "Failed to truncate table: " . $e->getMessage();
             $respostaAjax = 0;
         }
     }
@@ -27,7 +27,7 @@ try{
     $messages[] = "Colunas copiadas com sucesso!";
 }
 catch (PDOException $e) {
-    $messages[] = "Failed to copy data: " . $e->getMessage();
+    $messageError[] = "Failed to copy data: " . $e->getMessage();
     $respostaAjax = 0;
 }
 ?>
