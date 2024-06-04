@@ -10,7 +10,7 @@ try {
         $columnsName = array_column($result, 'COLUMN_NAME');
         
         foreach ($columnsName as $column) {
-            if ($column === 'id' || $column === 'col' || $column === $columnDrop) {
+            if ($column === $columnDrop) {
                 continue;
             }
             $sqlSelect = "ALTER TABLE $tableName DROP COLUMN $column;";
