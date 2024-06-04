@@ -1,7 +1,9 @@
 <?php
 $messages = array();
 $messagesError = array();
-//resposta Ajax vai ser 0 se der erro ou se BD já existe
+//respostaAjax = 0: Erro
+//respostaAjax = 1: Deu tudo certo
+//respostaAjax = 2: Apenas criou tabela auxiliar sem problemas
 $respostaAjax = 0;
 //BDjaCriado = 0: BD não existe
 //BDjaCriado = 1: existe BD e vai fazer pergunta
@@ -40,7 +42,7 @@ if($BDjaCriado === '2' || $BDjaCriado === '3') {
             // Move o arquivo para o diretório de destino
             if (move_uploaded_file($tmp_name, $destinoArquivo . $nomeArquivo)) {
                 $messages[] = "SUCESSO ao salvar os arquivos";
-                $respostaAjax = 1;
+                $respostaAjax = 2;
                 include_once('test.php');
             } else {
                 $messageError[] = "Error when saving files";
@@ -58,7 +60,7 @@ echo json_encode(array(
     'columnsName' => $header,
     'response' => $respostaAjax,
     '$columnDrop' => $columnDrop,
-    'message' => $messages,
-    'messageError' => $messagesError
+    'messages' => $messages,
+    'messagesError' => $messagesError
 ));
 ?>

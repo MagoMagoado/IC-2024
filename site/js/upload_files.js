@@ -65,6 +65,8 @@ document.addEventListener("DOMContentLoaded", function () {
 					console.error('Não conseguiu converter em JSON');
 				};
 				if (respostaAjax) {
+					htmlSuccessAndFailed(respostaAjax);
+
 					if (valueBDjaCriado != 2) {
 						if (respostaAjax.columnsName.length > 1) {
 							$("#mensagens-alerta").innerHTML = `
@@ -148,6 +150,8 @@ document.addEventListener("DOMContentLoaded", function () {
 					callAjax(files, 3, columnDrop);
 				});
 			}
+
+			// respostaAjax pode ser 0, 1 e 2. No 2 não é para fazer nada ainda
 			function htmlSuccessAndFailed(respostaAjax) {
 				if (respostaAjax.response === 1) {
 					$("#mensagens-alerta").innerHTML = `
@@ -155,14 +159,14 @@ document.addEventListener("DOMContentLoaded", function () {
 						<p> <strong>Success!</strong> files were sent successfully.</p>
 					</div>
 					`;
-					console.log(respostaAjax.message);
-				} else{
+				}
+				if (respostaAjax.response === 0) {
 					$("#mensagens-alerta").innerHTML = `
 					<div class="alert alert--error">
 						<p> <strong>Error!</strong> Files couldn't be sent.</p>
 					</div>
 					`;
-					console.error(respostaAjax.message);
+					console.error(respostaAjax.messagesError);
 				}
 			}
 
