@@ -217,6 +217,14 @@
     transition: all 150ms ease;
     color: #5A667F;
 }
+.disabledButton{
+    pointer-events: none;
+    background-color: #e4e4e4 !important;
+    border-color: #e4e4e4 !important;
+}
+.disabledButton span{
+    color: #b8b8b8 !important;
+}
 
 /* ---------------------------------------- */
 .carregandoFiles{

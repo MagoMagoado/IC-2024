@@ -51,6 +51,10 @@ document.addEventListener("DOMContentLoaded", function () {
 			ajax.open('POST', 'http://localhost/IC-2024/site/php/saveFile.php');
 			ajax.send(formdata);
 
+			document.querySelectorAll(".buttons-upload button").forEach(bnt => {
+				bnt.classList.add("disabledButton");
+			});
+
 			ajax.onload = function(){
 				//transforma em JSON
 				let respostaAjax = null;
@@ -65,6 +69,9 @@ document.addEventListener("DOMContentLoaded", function () {
 					console.error('Não conseguiu converter em JSON');
 				};
 				if (respostaAjax) {
+					document.querySelectorAll(".buttons-upload button").forEach(bnt => {
+						bnt.classList.remove("disabledButton");
+					});
 					htmlSuccessAndFailed(respostaAjax);
 
 					if (valueBDjaCriado != 2) {
@@ -159,6 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
 						<p> <strong>Success!</strong> files were sent successfully.</p>
 					</div>
 					`;
+					// $(".blur").classList.add("hidden");
 				}
 				if (respostaAjax.response === 0) {
 					$("#mensagens-alerta").innerHTML = `
