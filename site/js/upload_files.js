@@ -72,50 +72,56 @@ document.addEventListener("DOMContentLoaded", function () {
 					document.querySelectorAll(".buttons-upload button").forEach(bnt => {
 						bnt.classList.remove("disabledButton");
 					});
+					
 					htmlSuccessAndFailed(respostaAjax);
 
-					if (valueBDjaCriado != 2) {
-						if (respostaAjax.columnsName.length > 1) {
-							$("#mensagens-alerta").innerHTML = `
-								<div class="alert alert--warning">
-									<p><strong>Warning!</strong> More than one column exists.</p>
-								</div>
-							`;
-							let options = respostaAjax.columnsName.map(x => `<option value="${x}">${x}</option>`).join('');
-							$(".lines-update").innerHTML = `
-								<div class="warningBD">
-									<div class="warningColumns">
-										<svg class="icon-warning" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-											<path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
-										</svg>
-										<p>Warning!</p>
-										More than one column exists.<br>
-										Please select one column only.
-										<select id="selectColumn">
-											${options}
-										</select>
+					//se respostaAjax.response = 1 nem precisa do código abaixo, e precisa evitá-lo pois vai dar bug em mensagem de sucesso se ele for compilado
+					if (respostaAjax.response != 1) {
+						if (valueBDjaCriado != 2) {
+							if (respostaAjax.columnsName.length > 1) {
+								$("#mensagens-alerta").innerHTML = `
+									<div class="alert alert--warning">
+										<p><strong>Warning!</strong> More than one column exists.</p>
 									</div>
-								</div>
-							`;
-							$("#confirm-upload-files").classList.add("hidden");
-							$("#columnConfirm-upload-files").classList.remove("hidden");
-				
-							
-							var selectColumn = ($("#selectColumn").value);
-
-							$("#columnConfirm-upload-files").addEventListener("click", evt => {
-								evt.preventDefault();
-								if (respostaAjax.BD === 1) {
-									htmlBDExist(selectColumn);
-								} else{
-									console.log("bd NÃO existe!");
-								}
-							});	
-						} else{
-							htmlSuccessAndFailed(respostaAjax);
-						}
-					}else{
-
+								`;
+								let options = respostaAjax.columnsName.map(x => `<option value="${x}">${x}</option>`).join('');
+								$(".lines-update").innerHTML = `
+									<div class="warningBD">
+										<div class="warningColumns">
+											<svg class="icon-warning" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+												<path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+											</svg>
+											<p>Warning!</p>
+											More than one column exists.<br>
+											Please select one column only.
+											<select id="selectColumn">
+												${options}
+											</select>
+										</div>
+									</div>
+								`;
+								$("#confirm-upload-files").classList.add("hidden");
+								$("#columnConfirm-upload-files").classList.remove("hidden");
+					
+								
+								var selectColumn = ($("#selectColumn").value);
+	
+								$("#columnConfirm-upload-files").addEventListener("click", evt => {
+									evt.preventDefault();
+									if (respostaAjax.BD === '1') {
+										htmlBDExist(selectColumn);
+									} 
+									//BD vazia
+									else{
+										callAjax(files, 0, selectColumn);
+									}
+								});	
+							} else{
+								//CASO HAJA SÓ UMA COLUNA
+							}
+						}else{
+	
+						}	
 					}
 				}
 			}
@@ -162,31 +168,30 @@ document.addEventListener("DOMContentLoaded", function () {
 			function htmlSuccessAndFailed(respostaAjax) {
 				if (respostaAjax.response === 1) {
 					$("#mensagens-alerta").innerHTML = `
-					<div class="alert alert--success">
-						<p> <strong>Success!</strong> files were sent successfully.</p>
-					</div>
-					`;
-
-					$(".lines-update").innerHTML = `
-					<div class="warningBD">
-						<div class="success-animation">
-							<svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" /></svg>
+						<div class="alert alert--success">
+							<p> <strong>Success!</strong> files were sent successfully.</p>
 						</div>
-						<p>Success!</p>
-						Return to continue uploading.<br>
-					</div>
-				`;
+					`;
+					$(".lines-update").innerHTML = `
+						<div class="warningBD">
+							<div class="success-animation">
+								<svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" /></svg>
+							</div>
+							<p>Success!</p>
+							Return to continue uploading.<br>
+						</div>
+					`;
 					
 					//mudança botões
 					$(".buttons-upload").classList.remove("btnBDexist");
 					$(".bnt1").style.display = "none";
-					$("#columnConfirm-upload-files").classList.add("hidden");
-					$("#continue-upload-files").classList.add("hidden");
 					$("#return-upload-files").classList.remove("hidden");
 					$("#return-upload-files").addEventListener("click", evt => {
 						evt.preventDefault();
 						location.reload();
 					});
+					$("#continue-upload-files").style.display = "none";
+					$("#columnConfirm-upload-files").style.display = "none";
 				}
 				if (respostaAjax.response === 0) {
 					$("#mensagens-alerta").innerHTML = `

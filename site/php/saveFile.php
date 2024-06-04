@@ -55,6 +55,11 @@ if($BDjaCriado === '2' || $BDjaCriado === '3') {
     }
 }
 
+if ($BDjaCriado === '0' && $columnDrop != 'null') {
+    include_once('dropColumns.php');
+    include_once('copyColumns.php');
+}
+
 echo json_encode(array(
     'BD' => $BDjaCriado,
     'columnsName' => $header,

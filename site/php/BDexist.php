@@ -9,10 +9,10 @@ try {
     $tableExists = $stmt->fetchColumn();
     if ($tableExists > 0) {
         $messages[] = "Ja existem dados na tabela $tableName.";
-        $BDjaCriado = 1;
+        $BDjaCriado = '1';
     }
     else{
-        $BDjaCriado = 0;
+        $BDjaCriado = '0';
     }
 }
 catch (PDOException $e) {
