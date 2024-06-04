@@ -166,7 +166,27 @@ document.addEventListener("DOMContentLoaded", function () {
 						<p> <strong>Success!</strong> files were sent successfully.</p>
 					</div>
 					`;
-					// $(".blur").classList.add("hidden");
+
+					$(".lines-update").innerHTML = `
+					<div class="warningBD">
+						<div class="success-animation">
+							<svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" /><path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" /></svg>
+						</div>
+						<p>Success!</p>
+						Return to continue uploading.<br>
+					</div>
+				`;
+					
+					//mudança botões
+					$(".buttons-upload").classList.remove("btnBDexist");
+					$(".bnt1").style.display = "none";
+					$("#columnConfirm-upload-files").classList.add("hidden");
+					$("#continue-upload-files").classList.add("hidden");
+					$("#return-upload-files").classList.remove("hidden");
+					$("#return-upload-files").addEventListener("click", evt => {
+						evt.preventDefault();
+						location.reload();
+					});
 				}
 				if (respostaAjax.response === 0) {
 					$("#mensagens-alerta").innerHTML = `
@@ -175,6 +195,16 @@ document.addEventListener("DOMContentLoaded", function () {
 					</div>
 					`;
 					console.error(respostaAjax.messagesError);
+					//mudança botões
+					$(".buttons-upload").classList.remove("btnBDexist");
+					$(".bnt1").style.display = "none";
+					$("#columnConfirm-upload-files").classList.add("hidden");
+					$("#continue-upload-files").classList.add("hidden");
+					$("#return-upload-files").classList.remove("hidden");
+					$("#return-upload-files").addEventListener("click", evt => {
+						evt.preventDefault();
+						location.reload();
+					});
 				}
 			}
 
