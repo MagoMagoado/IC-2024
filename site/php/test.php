@@ -17,11 +17,11 @@ if ($arquivos !== false) {
                 $stmt = $conn->query($sqlSelect);
                 $tableExists = $stmt->fetchColumn();
                 if ($tableExists) {
-                    $messages[] = "Já existem dados no banco auxiliar.";
+                    $messages[] = "Ja existem dados no banco auxiliar.";
                     try {
                         $sqlDrop = "DROP TABLE $tableName";
                         $conn->exec($sqlDrop);
-                        $messages[] = "Dados excluídos com sucesso!";
+                        $messages[] = "Dados excluidos com sucesso!";
                     } catch (PDOException $e) {
                         $messages[] = "Connection failed: " . $e->getMessage();
                     }
@@ -83,7 +83,7 @@ if ($arquivos !== false) {
                                     }
                                 } catch (PDOException $e) {
                                     // Ignora a linha problemática e continua para a próxima
-                                    $messages[] = 'Linha ' . $rowCount . ' apresentou problema e foi excluída.';
+                                    $messages[] = 'Linha ' . $rowCount . ' apresentou problema e foi excluida.';
                                     continue;
                                 }
                             }

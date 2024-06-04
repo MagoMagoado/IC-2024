@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
 	App.init = (function () {
 		//Init
 
-		function callAjax(files, valueBDjaCriado) {
+		function callAjax(files, valueBDjaCriado, columnDrop) {
 			var ajax = new XMLHttpRequest();
 			var formdata = new FormData();
 
@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			});
 
 			formdata.append('BDjaCriado', valueBDjaCriado);
+			formdata.append('columnDrop', columnDrop);
 			ajax.open('POST', 'http://localhost/IC-2024/site/php/saveFile.php');
 			ajax.send(formdata);
 
@@ -64,49 +65,54 @@ document.addEventListener("DOMContentLoaded", function () {
 					console.error('Não conseguiu converter em JSON');
 				};
 				if (respostaAjax) {
-					if (respostaAjax.columnsName.length > 1) {
-						$("#mensagens-alerta").innerHTML = `
-							<div class="alert alert--warning">
-								<p><strong>Warning!</strong> More than one column exists.</p>
-							</div>
-						`;
-						let options = respostaAjax.columnsName.map(x => `<option value="${x}">${x}</option>`).join('');
-						$(".lines-update").innerHTML = `
-							<div class="warningBD">
-								<div class="warningColumns">
-									<svg class="icon-warning" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-										<path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
-									</svg>
-									<p>Warning!</p>
-									More than one column exists.<br>
-									Please select one column only.
-									<select id="selectColumn">
-										${options}
-									</select>
+					if (valueBDjaCriado != 2) {
+						if (respostaAjax.columnsName.length > 1) {
+							$("#mensagens-alerta").innerHTML = `
+								<div class="alert alert--warning">
+									<p><strong>Warning!</strong> More than one column exists.</p>
 								</div>
-							</div>
-						`;
-						$("#confirm-upload-files").classList.add("hidden");
-						$("#columnConfirm-upload-files").classList.remove("hidden");
-			
-						$("#columnConfirm-upload-files").addEventListener("click", evt => {
-							evt.preventDefault();
-							let selectColumn = ($("#selectColumn").value);
+							`;
+							let options = respostaAjax.columnsName.map(x => `<option value="${x}">${x}</option>`).join('');
+							$(".lines-update").innerHTML = `
+								<div class="warningBD">
+									<div class="warningColumns">
+										<svg class="icon-warning" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+											<path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/>
+										</svg>
+										<p>Warning!</p>
+										More than one column exists.<br>
+										Please select one column only.
+										<select id="selectColumn">
+											${options}
+										</select>
+									</div>
+								</div>
+							`;
+							$("#confirm-upload-files").classList.add("hidden");
+							$("#columnConfirm-upload-files").classList.remove("hidden");
+				
 							
-							if (respostaAjax.BD === 1) {
-								htmlBDExist(respostaAjax);
-							} else{
-								console.log("bd NÃO existe!");
-							}
-						});						
-					} else{
-						htmlSuccessAndFailed(respostaAjax);
+							var selectColumn = ($("#selectColumn").value);
+
+							$("#columnConfirm-upload-files").addEventListener("click", evt => {
+								evt.preventDefault();
+								if (respostaAjax.BD === 1) {
+									htmlBDExist(selectColumn);
+								} else{
+									console.log("bd NÃO existe!");
+								}
+							});	
+						} else{
+							htmlSuccessAndFailed(respostaAjax);
+						}
+					}else{
+
 					}
 				}
 			}
 			//fim ajax.onload
 			
-			function htmlBDExist(respostaAjax) {
+			function htmlBDExist(columnDrop) {
 				$("#mensagens-alerta").innerHTML = `
 					<div class="alert alert--warning">
 						<p> <strong>Warning!</strong> Database already exists.</p>
@@ -135,7 +141,11 @@ document.addEventListener("DOMContentLoaded", function () {
 				//
 				$("#continue-upload-files").addEventListener("click", evt => {
 					evt.preventDefault();
-					callAjax(files, 2);
+					callAjax(files, 2, columnDrop);
+				});
+				$("#delete-upload-files").addEventListener("click", evt => {
+					evt.preventDefault();
+					callAjax(files, 3, columnDrop);
 				});
 			}
 			function htmlSuccessAndFailed(respostaAjax) {
@@ -197,7 +207,7 @@ document.addEventListener("DOMContentLoaded", function () {
 			//confirm and save
 			$("#confirm-upload-files").addEventListener("click", evt => {
 				evt.preventDefault();
-				callAjax(files, 0);
+				callAjax(files, 0, null);
 			});
 		}
 

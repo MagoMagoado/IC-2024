@@ -4,10 +4,11 @@ $tableName = 'tabela_' . $DBName;
 $BDjaCriado = NULL;
 
 try {
-    $query = $conn->query("SHOW TABLES FROM $DBName");
-    $tableExists = $query->rowCount() > 0;
-    if ($tableExists) {
-        $messages[] = "Ja existem dados no banco.";
+    $sqlSelect = "SELECT COUNT(*) FROM $tableName;";
+    $stmt = $conn->query($sqlSelect);
+    $tableExists = $stmt->fetchColumn();
+    if ($tableExists > 0) {
+        $messages[] = "Ja existem dados na tabela $tableName.";
         $BDjaCriado = 1;
     }
     else{
@@ -15,6 +16,7 @@ try {
     }
 }
 catch (PDOException $e) {
-    echo ("Connection failed: " . $e->getMessage());
+    $messages[] = "Testing if data already exists failed: " . $e->getMessage();
+    $respostaAjax = 0;
 }
 ?>
