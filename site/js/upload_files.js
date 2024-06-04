@@ -77,7 +77,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 					//se respostaAjax.response = 1 nem precisa do código abaixo, e precisa evitá-lo pois vai dar bug em mensagem de sucesso se ele for compilado
 					if (respostaAjax.response != 1) {
-						if (valueBDjaCriado != 2) {
+						//evita que telas de warning sejam disparadas e deem bug nas outras telas que precisam ser mostradas
+						if (valueBDjaCriado != 2 || valueBDjaCriado != 3) {
 							if (respostaAjax.columnsName.length > 1) {
 								$("#mensagens-alerta").innerHTML = `
 									<div class="alert alert--warning">
@@ -119,9 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
 							} else{
 								//CASO HAJA SÓ UMA COLUNA
 							}
-						}else{
-	
-						}	
+						}
 					}
 				}
 			}
