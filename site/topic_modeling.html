@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,9 +16,8 @@
     <link rel="stylesheet" href="css/topic-modeling.css">
     <link rel="stylesheet" href="css/button_alert.css">
     <!-------------------------------------->
-    <script type="text/javascript" src="js/upload_files.js"></script>
-    <script type="text/javascript" src="js/popUp.js"></script>
 </head>
+
 <body>
     <header>
         <p class="typewriter"><b>Topic</b><b>Generation</b></p>
@@ -26,17 +26,21 @@
         <nav class="navbar">
             <ul class="navbar__menu">
                 <li class="navbar__item">
-                    <a href="index.html" class="navbar__link"><img src="img/home.png" alt="add files"><span>Home</span></a>
-                  </li>
-              <li class="navbar__item">
-                <a href="upload_files.html" class="navbar__link"><img src="img/add.png" alt="add files"><span>Add files</span></a>
-              </li>
-              <li class="navbar__item">
-                <a href="all_files.html" class="navbar__link"><img src="img/all-documents.png" alt="all files"></i><span>All files</span></a>
-              </li>
-              <li class="navbar__item">
-                <a href="#" class="navbar__link"><img src="img/deep-learning3.png" class="navbar_active" alt="all files"><span>Topic modeling</span></a>
-              </li>
+                    <a href="index.html" class="navbar__link"><img src="img/home.png"
+                            alt="add files"><span>Home</span></a>
+                </li>
+                <li class="navbar__item">
+                    <a href="upload_files.html" class="navbar__link"><img src="img/add.png" alt="add files"><span>Add
+                            files</span></a>
+                </li>
+                <li class="navbar__item">
+                    <a href="all_files.html" class="navbar__link"><img src="img/all-documents.png"
+                            alt="all files"></i><span>All files</span></a>
+                </li>
+                <li class="navbar__item">
+                    <a href="#" class="navbar__link"><img src="img/deep-learning3.png" class="navbar_active"
+                            alt="all files"><span>Topic modeling</span></a>
+                </li>
             </ul>
         </nav>
         <div class="center-list">
@@ -45,46 +49,48 @@
                 <div>LSA</div>
                 <div>Word2Vec</div>
             </div> -->
-            <div id="mensagens-alerta">
-                <div class="alert alert--info">
-                    <p> <strong>Warning!</strong> Please fill in all the fields.</p>
+            <div class="painelTM">
+                <div id="mensagens-alerta">
+                    <!-- <div class="alert alert--info">
+                        <p> <strong>Warning!</strong> Please fill in all the fields.</p>
+                    </div> -->
+                </div>
+                <div id="painelEscolha">
+                    <div id="infosCorpus">
+                        <p>Please enter the fields below to generate the model results</p>
+                        <p>Total of files in<span id="quantFiles"></span></p>
+                    </div>
+                    <form id="formulario" method="post">
+                        <div class="buttons">
+                            <button type="button" id="cleanCorpus" value="0">
+                                <span>clean corpus</span>
+                            </button>
+                            <button type="button" id="lemmaCorpus" value="0">
+                                <span>lemmatize corpus</span>
+                            </button>
+                        </div>
+                        <div class="inputs">
+                            <label for="topics">Topics </label>
+                            <input type="number" name="topics" id="topics" required>
+                        </div>
+                        <div class="inputs">
+                            <label for="words">Words </label>
+                            <input type="number" name="words" id="words" required>
+                        </div>
+                        <div class="inputs">
+                            <label for="interaction">Interaction </label>
+                            <input type="number" name="interaction" id="interaction">
+                        </div>
+                        <input id="generateTopics" type="submit" value="generate topics" />
+                    </form>
                 </div>
             </div>
-            <div id="painelEscolha">
-                <div id="infosCorpus">
-                    <p>Please enter the fields below to generate the model results</p>
-                    <p>Total of files in<span id="quantFiles"></span></p>
-                </div>
-                <form id="formulario" method="post">
-                    <div class="buttons">
-                        <button type="button" id="cleanCorpus" value="0">
-                            <span>clean corpus</span>
-                        </button>
-                        <button type="button" id="lemmaCorpus" value="0">
-                            <span>lemmatize corpus</span>
-                        </button>
-                    </div>
-                    <div class="inputs">
-                        <label for="topics">Topics </label>
-                        <input type="number" name="topics" id="topics" required>
-                    </div>
-                    <div class="inputs">
-                        <label for="words">Words </label>
-                        <input type="number" name="words" id="words" required>
-                    </div>
-                    <div class="inputs">
-                        <label for="interaction">Interaction </label>
-                        <input type="number" name="interaction" id="interaction">
-                    </div>
-                    <input id="generateTopics" type="submit" value="generate topics" />
-                </form>
-            </duv>
         </div>
     </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
-    window.addEventListener("DOMContentLoaded", function() {
+    window.addEventListener("DOMContentLoaded", function () {
         var url = 'http://localhost/IC-2024/site/php/countFiles.php';
         $.ajax({
             type: 'POST',
@@ -100,10 +106,6 @@
         });
     });
 
-    $("#cleanCorpus, #lemmaCorpus").on("click", function() {
-        $(this).toggleClass("hovered");
-        toggleButton(this);
-    });
     function toggleButton(button) {
         if (button.value === "0") {
             button.style.backgroundColor = "#fff";
@@ -121,7 +123,7 @@
             button.value = "0";
         }
     }
-    $("#cleanCorpus, #lemmaCorpus").on("click", function() {
+    $("#cleanCorpus, #lemmaCorpus").on("click", function () {
         $(this).toggleClass("hovered");
         toggleButton(this);
     });
@@ -134,6 +136,12 @@
         formData.append("lemmaCorpus", $("#lemmaCorpus").val());
         formData.append("typeModeling", "1");
         var url = 'http://localhost/IC-2024/site/php/modelingLDA.php';
+
+        $("#mensagens-alerta").html(`
+            <div class="alert alert--info">
+                <p> <strong>Wait!</strong> Wait for the complete process.</p>
+            </div>
+        `);
 
         $.ajax({
             type: 'POST',
@@ -179,4 +187,5 @@
         });
     });
 </script>
+
 </html>
