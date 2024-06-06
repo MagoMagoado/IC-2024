@@ -44,45 +44,44 @@
             </ul>
         </nav>
         <div class="center-list">
-            <!-- <div id="cards">
-                <div>LDA</div>
-                <div>LSA</div>
-                <div>Word2Vec</div>
-            </div> -->
-            <div class="painelTM">
-                <div id="mensagens-alerta">
-                    <!-- <div class="alert alert--info">
-                        <p> <strong>Warning!</strong> Please fill in all the fields.</p>
-                    </div> -->
-                </div>
-                <div id="painelEscolha">
-                    <div id="infosCorpus">
-                        <p>Please enter the fields below to generate the model results</p>
-                        <p>Total of files in<span id="quantFiles"></span></p>
+            <div class="alert alert--info">
+                <p> <strong>Warning!</strong> Please fill in all the fields.</p>
+            </div>
+            <div class="card" id="card-1">
+                <input type="checkbox" class="open-card" id="open-card-1" checked />
+			    <label class="open-card-label" for="open-card-1"></label>
+                <div class="card-content left-content">
+                    <div id="painelEscolha">
+                        <div id="infosCorpus">
+                            <p>Please enter the fields below to generate the model results</p>
+                            <p>Total of files in<span id="quantFiles"></span></p>
+                        </div>
+                        <form id="formulario" method="post">
+                            <div class="buttons">
+                                <button type="button" id="cleanCorpus" value="0">
+                                    <span>clean corpus</span>
+                                </button>
+                                <button type="button" id="lemmaCorpus" value="0">
+                                    <span>lemmatize corpus</span>
+                                </button>
+                            </div>
+                            <div class="inputs">
+                                <label for="topics">Topics </label>
+                                <input type="number" name="topics" id="topics" required>
+                            </div>
+                            <div class="inputs">
+                                <label for="words">Words </label>
+                                <input type="number" name="words" id="words" required>
+                            </div>
+                            <div class="inputs">
+                                <label for="interaction">Interaction </label>
+                                <input type="number" name="interaction" id="interaction">
+                            </div>
+                            <input id="generateTopics" type="submit" value="generate topics" />
+                        </form>
                     </div>
-                    <form id="formulario" method="post">
-                        <div class="buttons">
-                            <button type="button" id="cleanCorpus" value="0">
-                                <span>clean corpus</span>
-                            </button>
-                            <button type="button" id="lemmaCorpus" value="0">
-                                <span>lemmatize corpus</span>
-                            </button>
-                        </div>
-                        <div class="inputs">
-                            <label for="topics">Topics </label>
-                            <input type="number" name="topics" id="topics" required>
-                        </div>
-                        <div class="inputs">
-                            <label for="words">Words </label>
-                            <input type="number" name="words" id="words" required>
-                        </div>
-                        <div class="inputs">
-                            <label for="interaction">Interaction </label>
-                            <input type="number" name="interaction" id="interaction">
-                        </div>
-                        <input id="generateTopics" type="submit" value="generate topics" />
-                    </form>
+                </div>
+                <div class="card-content right-content">
                 </div>
             </div>
         </div>

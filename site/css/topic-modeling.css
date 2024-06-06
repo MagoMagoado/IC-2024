@@ -39,11 +39,186 @@
         1px 1px 0 #000;
     cursor: pointer;
 }
+/* --------------------------------------------------------------- */
+.card{
+	position: relative;
+	width: 350px;
+	height: 500px;
+	overflow: hidden;
+	color: #eaeef6;box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+}
+input[type="checkbox"] {
+	display: none;
+}
+/*card content*/
+.card-content {
+    width: 100%; height: 100%;
+	transition: all 0.25s ease-in-out;
+}
+/*card-content left-side*/
+.card-content.left-content {
+	opacity: 1;
+	left: 0;
+	transition-delay: 0.25s;
+}
+.card-content.right-content {
+	opacity: 0;
+	text-align: right;
+	left: 300px;
+	transition-delay: 0s;
+}
+
+/*card content right-side*/
+.card-toggle:checked ~ .card-content.left-content {
+	opacity: 0;
+	left: -300px;
+	transition-delay: 0s;
+}
+
+.card-toggle:checked ~ .card-content.right-content {
+	opacity: 1;
+	left: 0px;
+	transition-delay: 0.25s;
+}
+/*-------------------------*/
+/*    open card section    */
+/*-------------------------*/
+
+/*label open card*/
+label.open-card-label {
+	display: block;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	transform: translate(-50%, -50%);
+    margin-top: 2px;
+	z-index: 999;
+}
+input.open-card:checked + label.open-card-label {
+	top: 50%;
+	right: 50%;
+	transform: translate(-50%, -50%);
+}
+label.open-card-label::before {
+	content: "X";
+	display: block;
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1002;
+	border-radius: 50%;
+	border: 1px solid #ffffff33;
+	background: #00000066;
+	transition: all 0.25s ease-in-out;
+	cursor: pointer;
+	border-top-left-radius: 0%;
+	border-bottom-right-radius: 0%;
+}
+
+label.open-card-label::after {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 0px;
+	height: 0px;
+	background: #00000066;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1001;
+	border-radius: 50%;
+	backdrop-filter: blur(4px);
+	transition: all 0.5s ease-in-out;
+	pointer-events: none;
+}
+
+label.open-card-label:hover::after {
+	width: 1250px;
+	height: 1250px;
+}
+
+input.open-card:checked + label.open-card-label::before {
+	content: "LDA";
+	width: 90px;
+	height: 90px;
+	text-align: center;
+	line-height: 90px;
+	overflow: hidden;
+	transition-delay: 0;
+	border-top-left-radius: 50%;
+	border-bottom-right-radius: 50%;
+    color: #eaeef6;
+    font-family: 'Roboto', sans-serif;
+    font-weight: bolder;
+    font-size: 2rem;
+    text-shadow:
+       3px 3px 0 #222222cc,
+     -1px -1px 0 #222222cc,  
+      1px -1px 0 #222222cc,
+      -1px 1px 0 #222222cc,
+       1px 1px 0 #222222cc;
+}
+input.open-card:checked ~ label.open-card-label:hover::before {
+	color: #eaeef6;;
+    text-shadow:
+        3px 3px 0 #000,
+        -1px -1px 0 #000,  
+        1px -1px 0 #000,
+        -1px 1px 0 #000,
+        1px 1px 0 #000;
+    cursor: pointer;
+}
+input.open-card:checked ~ label.open-card-label::after {
+	background: #5f86ce;
+}
+
+input.open-card:checked ~ label.card-toggle-label {
+	opacity: 0;
+	left: 120%;
+}
+
+/*background open-card*/
+input.open-card:checked ~ .card-image {
+	background-position: 50% 50%;
+	opacity: 1;
+}
+
+/*card-header open-card*/
+input.open-card:checked ~ .card-header {
+	opacity: 0;
+	top: -100px;
+}
+
+/*card-content open-card*/
+input.open-card:checked ~ .card-content {
+	opacity: 0;
+}
+input.open-card:checked ~ .card-content.left-content {
+	left: -300px;
+	transition-delay: 0s;
+}
+input.open-card:checked ~ .card-content.right-content {
+	left: 300px;
+	transition-delay: 0s;
+}
+
+/*card-footer open-card*/
+input.open-card:checked ~ .card-footer {
+	opacity: 0;
+	bottom: -100px;
+}
+/* --------------------------------------------------------------- */
 #painelEscolha{
-    width: 15vw;
-    height: 45vh;
-    padding: 20px;
-    border-radius: 20px;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 50px 20px 20px 20px;
     background-color: #5f86ce;
 }
 #infosCorpus p{
