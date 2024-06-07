@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				}
 			}
 
+			
 			Object.keys(files).forEach(fileIndex => {
 				let file = files[fileIndex];
 				let fileType = file.type; // Obtém o tipo do arquivo
@@ -49,7 +50,15 @@ document.addEventListener("DOMContentLoaded", function () {
 			formdata.append('BDjaCriado', valueBDjaCriado);
 			formdata.append('columnDrop', columnDrop);
 			ajax.open('POST', 'http://localhost/IC-2024/site/php/saveFile.php');
-			ajax.send(formdata);
+
+			if (valueBDjaCriado != 0) {
+				var params = `BDjaCriado=${encodeURIComponent(valueBDjaCriado)}&columnDrop=${encodeURIComponent(columnDrop)}`;
+				ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+				ajax.send(params); // Envia os dados manualmente
+					
+			} else{
+				ajax.send(formdata);
+			}
 
 			document.querySelectorAll(".buttons-upload button").forEach(bnt => {
 				bnt.classList.add("disabledButton");
@@ -103,18 +112,17 @@ document.addEventListener("DOMContentLoaded", function () {
 								`;
 								$("#confirm-upload-files").classList.add("hidden");
 								$("#columnConfirm-upload-files").classList.remove("hidden");
-					
-								
-								var selectColumn = ($("#selectColumn").value);
 	
 								$("#columnConfirm-upload-files").addEventListener("click", evt => {
 									evt.preventDefault();
+									//selectColumn precisa ficar dentro do clique para pegar o valor atual do #selectColumn
+									let selectColumn = $("#selectColumn").value;
 									if (respostaAjax.BD === '1') {
 										htmlBDExist(selectColumn);
 									} 
 									//BD vazia
 									else{
-										callAjax(files, 0, selectColumn);
+										callAjax(files, 4, selectColumn);
 									}
 								});	
 							} else{
@@ -198,7 +206,9 @@ document.addEventListener("DOMContentLoaded", function () {
 						<p> <strong>Error!</strong> Files couldn't be sent.</p>
 					</div>
 					`;
-					console.error(respostaAjax.messagesError);
+					if (respostaAjax.messagesError) {
+						console.error(respostaAjax.messagesError);
+					} 
 					//mudança botões
 					$(".buttons-upload").classList.remove("btnBDexist");
 					$(".bnt1").style.display = "none";
