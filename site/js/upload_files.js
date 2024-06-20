@@ -28,37 +28,34 @@ document.addEventListener("DOMContentLoaded", function () {
 				}
 			}
 
-			
-			Object.keys(files).forEach(fileIndex => {
-				let file = files[fileIndex];
-				let fileType = file.type; // Obtém o tipo do arquivo
-
-				// Verifica se o tipo de arquivo é CSV
-				if (fileType === 'text/csv' || file.name.endsWith('.csv')) {
-					formdata.append('files[]', file);
-				} else{
-					ajax.abort();
-					console.error('Arquivo não é do tipo csv:', file.name);
-					$("#mensagens-alerta").innerHTML = `
-					<div class="alert alert--info">
-						<p> <strong>Warning!</strong> Please select a csv file.</p>
-					</div>
-					`;
-				}
-			});
+			if (files != 0) {
+				Object.keys(files).forEach(fileIndex => {
+					let file = files[fileIndex];
+					let fileType = file.type; // Obtém o tipo do arquivo
+	
+					// Verifica se o tipo de arquivo é CSV
+					if (fileType === 'text/csv' || file.name.endsWith('.csv')) {
+						formdata.append('files[]', file);
+					} else{
+						ajax.abort();
+						console.error('Arquivo não é do tipo csv:', file.name);
+						$("#mensagens-alerta").innerHTML = `
+						<div class="alert alert--info">
+							<p> <strong>Warning!</strong> Please select a csv file.</p>
+						</div>
+						`;
+					}
+				});
+			}
 
 			formdata.append('BDjaCriado', valueBDjaCriado);
 			formdata.append('columnDrop', columnDrop);
 			ajax.open('POST', 'http://localhost/IC-2024/site/php/saveFile.php');
 
-			if (valueBDjaCriado != 0) {
-				var params = `BDjaCriado=${encodeURIComponent(valueBDjaCriado)}&columnDrop=${encodeURIComponent(columnDrop)}`;
-				ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-				ajax.send(params); // Envia os dados manualmente
-					
-			} else{
-				ajax.send(formdata);
+			for (var pair of formdata.entries()) {
+				console.log(pair[0]+ ': ' + pair[1]);
 			}
+			ajax.send(formdata);
 
 			document.querySelectorAll(".buttons-upload button").forEach(bnt => {
 				bnt.classList.add("disabledButton");
@@ -163,11 +160,11 @@ document.addEventListener("DOMContentLoaded", function () {
 				//
 				$("#continue-upload-files").addEventListener("click", evt => {
 					evt.preventDefault();
-					callAjax(files, 2, columnDrop);
+					callAjax(0, 2, columnDrop);
 				});
 				$("#delete-upload-files").addEventListener("click", evt => {
 					evt.preventDefault();
-					callAjax(files, 3, columnDrop);
+					callAjax(0, 3, columnDrop);
 				});
 			}
 

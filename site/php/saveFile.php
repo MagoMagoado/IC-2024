@@ -9,22 +9,23 @@ $respostaAjax = 0;
 //BDjaCriado = 1: existe BD e vai fazer pergunta
 //BDjaCriado = 2: existe BD e vai adicionar mais dados ao que já tem
 //BDjaCriado = 3: existe BD e vai excluir dados que já existam antes
+//BDjaCriado = 4: não existe BD e vai adicionar
 $BDjaCriado = isset($_POST['BDjaCriado']) ? $_POST['BDjaCriado'] : 0;
 $columnDrop = isset($_POST['columnDrop']) ? $_POST['columnDrop'] : null;
 $header = NULL;
 
-if($BDjaCriado != '2' && $BDjaCriado != '3'){
+if($BDjaCriado != '2' && $BDjaCriado != '3' && $BDjaCriado != '4'){
     //verifica se o BD já existe
     include_once('BDexist.php');
 }
 
-if($BDjaCriado === '2' || $BDjaCriado === '3') {
+if($BDjaCriado === '2' || $BDjaCriado === '3' || $BDjaCriado === '4') {
     //clicou continue então vai adicionar mais dados os dados que já existem
     include_once('dropColumns.php');
     include_once('copyColumns.php');
 
 }else{
-    if (!empty($_FILES['files']['name'])) {
+    if (!empty($_FILES['files']['name']) || isset($_FILES['files'])) {
         $files = $_FILES['files'];
     
         // Diretório onde os arquivos serão salvos
@@ -53,11 +54,6 @@ if($BDjaCriado === '2' || $BDjaCriado === '3') {
         $messageError[] = "No files sent";
         $respostaAjax = 0;
     }
-}
-
-if ($BDjaCriado === '0' && $columnDrop != 'null') {
-    include_once('dropColumns.php');
-    include_once('copyColumns.php');
 }
 
 echo json_encode(array(
