@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $interaction = $_POST['interaction'];
     $typeModeling = $_POST['typeModeling'];
 
-    echo $clean,' - ', $lemma,' - ', $topics,' - ', $words,' - ', $interaction, ' - ', $typeModeling;
+    // echo $clean,' - ', $lemma,' - ', $topics,' - ', $words,' - ', $interaction, ' - ', $typeModeling;
     
     $shell = "python {$path} $clean $lemma $topics $words $interaction $typeModeling";
     $cmdResult = exec($shell);

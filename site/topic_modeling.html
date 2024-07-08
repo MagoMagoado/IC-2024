@@ -82,7 +82,7 @@
                                         <label for="interaction">Interaction </label>
                                         <input type="number" name="interaction">
                                     </div>
-                                    <input class="generateTopics" type="submit" value="generate topics" />
+                                    <input class="generateTopics bntsubmit" type="submit" value="generate topics" />
                                 </form>
                             </div>
                         </div>
@@ -153,7 +153,7 @@
                                     <p>Before using the Word2Vec template, make sure that one of the topic modeling templates has been processed.</p>
                                     <div>
                                         <input class="generateTopics disableButton" type="submit" value="LSA" disabled/>
-                                        <input class="generateTopics disableButton" type="submit" value="LDA" disabled/>
+                                        <input class="generateTopics bnt-w2vLSA disableButton" type="submit" value="LDA" disabled/>
                                     </div>
                                 </form>
                             </div>
@@ -205,8 +205,9 @@
     });
     $(".formulario").submit(function (event) {
         event.preventDefault();
-        $(".generateTopics").prop("disabled", true);
-        $(".generateTopics").addClass("disableButton");
+        var buttomSubmit = $(this).find(".generateTopics");
+        buttomSubmit.prop("disabled", true);
+        buttomSubmit.addClass("disableButton");
         let formData = new FormData(this);
         
         let cleanCorpusValue = $(this).find(".cleanCorpus").val();
@@ -230,8 +231,8 @@
             processData: false, // Impede o jQuery de tentar serializar o formData
             contentType: false, // Impede o jQuery de definir o tipo de conteúdo
             success: function (data) {
-                $(".generateTopics").prop("disabled", false);
-                $(".generateTopics").removeClass("disableButton");
+                buttomSubmit.prop("disabled", false);
+                buttomSubmit.removeClass("disableButton");
                 $("#mensagens-alerta").html(`
                     <div class="alert alert--success">
                         <p> <strong>Success!</strong> Process completed successfully.</p>
