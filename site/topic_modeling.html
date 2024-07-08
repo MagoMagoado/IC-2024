@@ -127,7 +127,7 @@
                                         <label for="interaction">Interaction </label>
                                         <input type="number" name="interaction">
                                     </div>
-                                    <input class="generateTopics" type="submit" value="generate topics" />
+                                    <input id="LDAsubmit" class="generateTopics" type="submit" value="generate topics"/>
                                 </form>
                             </div>
                         </div>
@@ -141,21 +141,21 @@
                         </div>
                     </div>
                     <div class="card" id="card-3">
-                        <!-- <input type="checkbox" class="open-card" id="open-card-3" checked /> -->
-                        <!-- <label class="open-card-label" for="open-card-3"></label> -->
+                        <input type="checkbox" class="open-card" id="open-card-3" checked />
+                        <label class="open-card-label" for="open-card-3"></label>
                         <div class="card-content left-content">
                             <div class="painelEscolha">
                                 <div class="infosCorpus">
                                     <p>Please enter the fields below to use <span>Word2Vec</span> model</p>
                                     <p>Total of files in<span class="quantFiles"></span></p>
                                 </div>
-                                <form class="formW2V" method="post">
-                                    <p>Before using the Word2Vec template, make sure that one of the topic modeling templates has been processed.</p>
+                                <div class="formW2V" method="post">
+                                    <p>Before using the Word2Vec model, make sure that one of the topic modeling templates has been processed.</p>
                                     <div>
-                                        <input class="generateTopics disableButton" type="submit" value="LSA" disabled/>
-                                        <input class="generateTopics bnt-w2vLSA disableButton" type="submit" value="LDA" disabled/>
+                                        <input id="bnt-w2vLSA" class="generateTopics disableButton" type="submit" value="LSA" disabled/>
+                                        <input id="bnt-w2vLDA" class="generateTopics disableButton" type="submit" value="LDA" disabled/>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -205,7 +205,16 @@
     });
     $(".formulario").submit(function (event) {
         event.preventDefault();
-        var buttomSubmit = $(this).find(".generateTopics");
+        let buttomSubmit = $(this).find(".generateTopics");
+
+        var typeModeling = '1';
+        if (buttomSubmit.attr('id') === 'LDAsubmit') {
+            typeModeling = '1';
+        }
+        else{
+            typeModeling = '2';
+        }
+        console.log(typeModeling);
         buttomSubmit.prop("disabled", true);
         buttomSubmit.addClass("disableButton");
         let formData = new FormData(this);
@@ -215,7 +224,7 @@
 
         formData.append("cleanCorpus", cleanCorpusValue);
         formData.append("lemmaCorpus", lemmaCorpusValue);
-        formData.append("typeModeling", "1");
+        formData.append("typeModeling", typeModeling);
         var url = 'http://localhost/IC-2024/site/php/modelingLDA.php';
 
         $("#mensagens-alerta").html(`
@@ -240,11 +249,22 @@
                 `);
 
                 try {
-                    let filePath = "http://localhost/IC-2024/site/exportExcel/lda.xlsx";
                     let link = document.createElement('a');
-                    link.href = filePath;
-                    link.download = 'lda.xlsx';
-
+                    if (typeModeling === '1') {
+                        let filePath = "http://localhost/IC-2024/site/exportExcel/lda.xlsx";
+                        link.href = filePath;
+                        link.download = 'lda.xlsx';
+                        $("#bnt-w2vLDA").prop("disabled", false);
+                        $("#bnt-w2vLDA").removeClass("disableButton");
+                    }
+                    else{
+                        let filePath = "http://localhost/IC-2024/site/exportExcel/lsa.xlsx";
+                        link.href = filePath;
+                        link.download = 'lsa.xlsx';
+                        $("#bnt-w2vLSA").prop("disabled", false);
+                        $("#bnt-w2vLSA").removeClass("disableButton");
+                    }
+                    
                     // Adicionar o link ao corpo do documento
                     document.body.appendChild(link);
 
@@ -266,6 +286,19 @@
                 console.error(xhr.responseText);
             }
         });
+    });
+    $("#bnt-w2vLDA, #bnt-w2vLSA").on("click", function () {
+        try {
+            let link = document.createElement('a');
+            let filePath = "http://localhost/IC-2024/site/exportExcel/word2Vec.xlsx";
+            link.href = filePath;
+            link.download = 'word2Vec.xlsx';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } catch (error) {
+            console.error('Erro:', error);
+        }
     });
 </script>
 
