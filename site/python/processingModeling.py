@@ -80,8 +80,6 @@ def Document_Cleansing(Document):
     # Verificar se Document é um valor nulo
     if pd.isna(Document):
         return ''  # Retorna uma string vazia para valores nulos
-    Document = " ".join([word for word in Document.split() if word not in stop_words])
-    Document = " ".join([word for word in Document.split() if len(word) > 2 ])
 
     # This will make all the words in the documents lower-case:
     Document = Document.lower()
@@ -98,6 +96,8 @@ def Document_Cleansing(Document):
     # removing numbers which contain commas:
     Document = re.sub(r'(\d+),(\d+),?(\d*)', " ", Document)
 
+    Document = " ".join([word for word in Document.split() if word not in stop_words])
+    Document = " ".join([word for word in Document.split() if len(word) > 2])
     return Document
 
 if(clean == '1'):
@@ -165,4 +165,43 @@ if(typeModeling == '1'):
 
     except Error as e:
         print("Erro LDA")
+        exit()
+
+# Tipo LSA
+if(typeModeling == '2'):
+    try:
+        lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus,
+                                            id2word=dictionary,
+                                            num_topics= int(topics),
+                                            random_state=100, #semente
+                                            update_every=1, #frequência que o modelo é atualizado ao ver cada documento
+                                            chunksize=10, #número de documentos a serem usados em cada iteração
+                                            passes=int(interaction), #número de vezes que o modelo percorrerá o corpus inteiro durante o treinamento
+                                            alpha="auto" #distribuição de tópicos por documento
+                                            )
+        # Visualizar os tópicos gerados pelo modelo LDA
+        topics = lda_model.show_topics(num_topics=int(topics), num_words=int(words), formatted=False)
+
+        # Criar um DataFrame
+        data = []
+        for topic_id, topic_words in topics:
+            for word, weight in topic_words:
+                data.append([topic_id, word, weight])
+
+        df_export = pd.DataFrame(data, columns=["topic", "word", "weight"])
+        excel_file = "lda.xlsx"
+        dir = r"D:\Downloads\Programas\xampp\htdocs\IC-2024\site\exportExcel"
+        # Combina o diretório e o nome do arquivo
+        output_path = os.path.join(dir, excel_file)
+        try:
+            df_export.to_excel(output_path, index=False)
+
+            #se tudo der certo, retorna caminho do arquivo
+            print(output_path)
+        except Error as e:
+            print("Erro EXCEL")
+            exit()
+
+    except Error as e:
+        print("Erro LSA")
         exit()

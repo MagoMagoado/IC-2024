@@ -44,44 +44,118 @@
             </ul>
         </nav>
         <div class="center-list">
-            <div class="alert alert--info">
-                <p> <strong>Warning!</strong> Please fill in all the fields.</p>
-            </div>
-            <div class="card" id="card-1">
-                <input type="checkbox" class="open-card" id="open-card-1" checked />
-			    <label class="open-card-label" for="open-card-1"></label>
-                <div class="card-content left-content">
-                    <div id="painelEscolha">
-                        <div id="infosCorpus">
-                            <p>Please enter the fields below to generate the model results</p>
-                            <p>Total of files in<span id="quantFiles"></span></p>
+            <div id="cards">
+                <!-- LSA -->
+                <div class="blocCard">
+                    <div class="mensagens-alerta">
+                        <div class="alert alert--info">
+                            <p> <strong>Warning!</strong> Please fill in all the fields.</p>
                         </div>
-                        <form id="formulario" method="post">
-                            <div class="buttons">
-                                <button type="button" id="cleanCorpus" value="0">
-                                    <span>clean corpus</span>
-                                </button>
-                                <button type="button" id="lemmaCorpus" value="0">
-                                    <span>lemmatize corpus</span>
-                                </button>
+                    </div>
+                    <div class="card" id="card-1">
+                        <input type="checkbox" class="open-card" id="open-card-1" checked />
+                        <label class="open-card-label" for="open-card-1"></label>
+                        <div class="card-content left-content">
+                            <div class="painelEscolha">
+                                <div class="infosCorpus">
+                                    <p>Please enter the fields below to use <span>LSA</span> model</p>
+                                    <p>Total of files in<span class="quantFiles"></span></p>
+                                </div>
+                                <form class="formulario" method="post">
+                                    <div class="buttons">
+                                        <button type="button" class="cleanCorpus" value="0">
+                                            <span>clean corpus</span>
+                                        </button>
+                                        <button type="button" class="lemmaCorpus" value="0">
+                                            <span>lemmatize corpus</span>
+                                        </button>
+                                    </div>
+                                    <div class="inputs">
+                                        <label for="topics">Topics </label>
+                                        <input type="number" name="topics" required>
+                                    </div>
+                                    <div class="inputs">
+                                        <label for="words">Words </label>
+                                        <input type="number" name="words" required>
+                                    </div>
+                                    <div class="inputs">
+                                        <label for="interaction">Interaction </label>
+                                        <input type="number" name="interaction">
+                                    </div>
+                                    <input class="generateTopics" type="submit" value="generate topics" />
+                                </form>
                             </div>
-                            <div class="inputs">
-                                <label for="topics">Topics </label>
-                                <input type="number" name="topics" id="topics" required>
-                            </div>
-                            <div class="inputs">
-                                <label for="words">Words </label>
-                                <input type="number" name="words" id="words" required>
-                            </div>
-                            <div class="inputs">
-                                <label for="interaction">Interaction </label>
-                                <input type="number" name="interaction" id="interaction">
-                            </div>
-                            <input id="generateTopics" type="submit" value="generate topics" />
-                        </form>
+                        </div>
+                        <div class="card-content right-content">
+                        </div>
                     </div>
                 </div>
-                <div class="card-content right-content">
+                <!-- LDA -->
+                <div class="blocCard">
+                    <div class="mensagens-alerta">
+                        <div class="alert alert--info">
+                            <p> <strong>Warning!</strong> Please fill in all the fields.</p>
+                        </div>
+                    </div>
+                    <div class="card" id="card-2">
+                        <input type="checkbox" class="open-card" id="open-card-2" checked />
+                        <label class="open-card-label" for="open-card-2"></label>
+                        <div class="card-content left-content">
+                            <div class="painelEscolha">
+                                <div class="infosCorpus">
+                                    <p>Please enter the fields below to use <span>LDA</span> model</p>
+                                    <p>Total of files in<span class="quantFiles"></span></p>
+                                </div>
+                                <form class="formulario" method="post">
+                                    <div class="buttons">
+                                        <button type="button" class="cleanCorpus" value="0">
+                                            <span>clean corpus</span>
+                                        </button>
+                                        <button type="button" class="lemmaCorpus" value="0">
+                                            <span>lemmatize corpus</span>
+                                        </button>
+                                    </div>
+                                    <div class="inputs">
+                                        <label for="topics">Topics </label>
+                                        <input type="number" name="topics" required>
+                                    </div>
+                                    <div class="inputs">
+                                        <label for="words">Words </label>
+                                        <input type="number" name="words" required>
+                                    </div>
+                                    <div class="inputs">
+                                        <label for="interaction">Interaction </label>
+                                        <input type="number" name="interaction">
+                                    </div>
+                                    <input class="generateTopics" type="submit" value="generate topics" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Word2Vec -->
+                <div class="blocCard">
+                    <div class="mensagens-alerta">
+                        <div class="alert alert--info">
+                            <p> <strong>Warning!</strong> Please fill in all the fields.</p>
+                        </div>
+                    </div>
+                    <div class="card" id="card-3">
+                        <input type="checkbox" class="open-card" id="open-card-3" checked />
+                        <label class="open-card-label" for="open-card-3"></label>
+                        <div class="card-content left-content">
+                            <div class="painelEscolha">
+                                <div class="infosCorpus">
+                                    <p>Please enter the fields below to use <span>Word2Vec</span> model</p>
+                                    <p>Total of files in<span class="quantFiles"></span></p>
+                                </div>
+                                <form class="formulario" method="post">
+                                    
+                                    <input class="generateTopics" type="submit" value="generate topics" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -97,7 +171,7 @@
             processData: false, // Impede o jQuery de tentar serializar o formData
             contentType: false, // Impede o jQuery de definir o tipo de conteúdo
             success: function (data) {
-                $("#quantFiles").html(data);
+                $(".quantFiles").html(data);
             },
             error: function (xhr, status, error) {
                 console.error(xhr.responseText);
@@ -122,17 +196,21 @@
             button.value = "0";
         }
     }
-    $("#cleanCorpus, #lemmaCorpus").on("click", function () {
+    $(".cleanCorpus, .lemmaCorpus").on("click", function () {
         $(this).toggleClass("hovered");
         toggleButton(this);
     });
-    $("#formulario").submit(function (event) {
+    $(".formulario").submit(function (event) {
         event.preventDefault();
-        $("#generateTopics").prop("disabled", true);
-        $("#generateTopics").addClass("disableButton");
+        $(".generateTopics").prop("disabled", true);
+        $(".generateTopics").addClass("disableButton");
         let formData = new FormData(this);
-        formData.append("cleanCorpus", $("#cleanCorpus").val());
-        formData.append("lemmaCorpus", $("#lemmaCorpus").val());
+        
+        let cleanCorpusValue = $(this).find(".cleanCorpus").val();
+        let lemmaCorpusValue = $(this).find(".lemmaCorpus").val();
+
+        formData.append("cleanCorpus", cleanCorpusValue);
+        formData.append("lemmaCorpus", lemmaCorpusValue);
         formData.append("typeModeling", "1");
         var url = 'http://localhost/IC-2024/site/php/modelingLDA.php';
 
@@ -149,8 +227,8 @@
             processData: false, // Impede o jQuery de tentar serializar o formData
             contentType: false, // Impede o jQuery de definir o tipo de conteúdo
             success: function (data) {
-                $("#generateTopics").prop("disabled", false);
-                $("#generateTopics").removeClass("disableButton");
+                $(".generateTopics").prop("disabled", false);
+                $(".generateTopics").removeClass("disableButton");
                 $("#mensagens-alerta").html(`
                     <div class="alert alert--success">
                         <p> <strong>Success!</strong> Process completed successfully.</p>

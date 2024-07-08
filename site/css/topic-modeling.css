@@ -4,40 +4,11 @@
 }
 #cards{
     display: flex;
+    gap: 2%;
+    margin-bottom: 3rem;
 }
-#cards div{
-    width: 250px;
-    height: calc(200px * 1.5);
-    border: 1px solid #ffffffcc;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-    border-radius: 1rem;
-    margin-right: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #eaeef6;
-    font-family: 'Roboto', sans-serif;
-    font-weight: bolder;
-    font-size: 2rem;
-    text-shadow:
-       3px 3px 0 #222222cc,
-     -1px -1px 0 #222222cc,  
-      1px -1px 0 #222222cc,
-      -1px 1px 0 #222222cc,
-       1px 1px 0 #222222cc;
-    transition: .3s ease;
-}
-#cards div:hover{
-    transform: scale(1.03);
-    background-color: #5f86ce;
-    color: #eaeef6;;
-    text-shadow:
-        3px 3px 0 #000,
-        -1px -1px 0 #000,  
-        1px -1px 0 #000,
-        -1px 1px 0 #000,
-        1px 1px 0 #000;
-    cursor: pointer;
+.mensagens-alerta{
+    visibility: hidden;
 }
 /* --------------------------------------------------------------- */
 .card{
@@ -142,9 +113,16 @@ label.open-card-label:hover::after {
 	width: 1250px;
 	height: 1250px;
 }
-
+#card-1 input.open-card:checked + label.open-card-label::before {
+    content: "LSA";
+}
+#card-2 input.open-card:checked + label.open-card-label::before {
+    content: "LDA";
+}
+#card-3 input.open-card:checked + label.open-card-label::before {
+    content: "W2V";
+}
 input.open-card:checked + label.open-card-label::before {
-	content: "LDA";
 	width: 90px;
 	height: 90px;
 	text-align: center;
@@ -214,29 +192,43 @@ input.open-card:checked ~ .card-footer {
 	bottom: -100px;
 }
 /* --------------------------------------------------------------- */
-#painelEscolha{
+.painelEscolha{
     width: 100%;
     height: 100%;
     box-sizing: border-box;
     padding: 50px 20px 20px 20px;
     background-color: #5f86ce;
 }
-#infosCorpus p{
+.infosCorpus p {
     width: 100%;
-    display: flex;
     cursor: default;
     color: #f0f0f0;
-    align-items: center;
+    font-size: 1rem;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+    text-align: left;
 }
-#infosCorpus p:nth-child(1){
+.infosCorpus p:first-child {
     color: #fff;
     font-size: 1.3rem;
     font-weight: bold;
+    text-align: center;
 }
-#infosCorpus p:nth-child(2){
+.infosCorpus p span {
+    color: inherit;
+}
+.infosCorpus p:first-child span {
+    font-family: mukta;
+    font-size: 1.4rem;
+    color: #000000;
+}
+.infosCorpus p:nth-child(2){
     margin: 10px 0 20px 0;
+    display: flex;
+    align-items: center;
 }
-#quantFiles{
+.quantFiles{
     width: 40px; height: 40px;
     display: flex;
     flex-direction: row;
@@ -333,7 +325,7 @@ form{
 }
 .inputs input:focus{box-shadow: inset 0 -5px 45px rgb(53, 53, 53), 0 1px 1px rgba(255,255,255,0.5);}
 
-#generateTopics {
+.generateTopics {
     transition: all 0.25s cubic-bezier(0.65, 0, 0.076, 1);
     font-size: .9rem;
     font-family: mukta;
@@ -351,7 +343,7 @@ form{
     color: #fff;
     cursor: pointer;
 }
-#generateTopics:hover{
+.generateTopics:hover{
     background-color: #274274;
     border-color: #274274;
     box-shadow: rgba(0, 0, 0, .2) 0 2px 4px -1px, rgba(0, 0, 0, .14) 0 4px 5px 0, rgba(0, 0, 0, .12) 0 1px 10px 0;
@@ -360,7 +352,6 @@ form{
     background-color: #cccccc !important;
     border-color: #cccccc !important;
     color: #969696 !important;
-    font-family: inherit;
     cursor: default !important;
     box-shadow: none !important;
 }
