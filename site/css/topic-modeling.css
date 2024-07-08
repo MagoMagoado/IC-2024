@@ -283,6 +283,16 @@ form{
     align-items: center;
     justify-content: center;
 }
+.formW2V{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5rem;
+}
+.formW2V p{
+    text-align: center;
+    width: 90%;
+}
 .inputs{
     display: flex;
     flex-direction: column;

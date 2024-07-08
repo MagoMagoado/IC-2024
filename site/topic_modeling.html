@@ -141,17 +141,20 @@
                         </div>
                     </div>
                     <div class="card" id="card-3">
-                        <input type="checkbox" class="open-card" id="open-card-3" checked />
-                        <label class="open-card-label" for="open-card-3"></label>
+                        <!-- <input type="checkbox" class="open-card" id="open-card-3" checked /> -->
+                        <!-- <label class="open-card-label" for="open-card-3"></label> -->
                         <div class="card-content left-content">
                             <div class="painelEscolha">
                                 <div class="infosCorpus">
                                     <p>Please enter the fields below to use <span>Word2Vec</span> model</p>
                                     <p>Total of files in<span class="quantFiles"></span></p>
                                 </div>
-                                <form class="formulario" method="post">
-                                    
-                                    <input class="generateTopics" type="submit" value="generate topics" />
+                                <form class="formW2V" method="post">
+                                    <p>Before using the Word2Vec template, make sure that one of the topic modeling templates has been processed.</p>
+                                    <div>
+                                        <input class="generateTopics disableButton" type="submit" value="LSA" disabled/>
+                                        <input class="generateTopics disableButton" type="submit" value="LDA" disabled/>
+                                    </div>
                                 </form>
                             </div>
                         </div>
