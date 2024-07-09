@@ -78,7 +78,7 @@
                                         <label for="words">Words </label>
                                         <input type="number" name="words" required>
                                     </div>
-                                    <div class="inputs">
+                                    <div class="inputs" style="visibility: hidden;">
                                         <label for="interaction">Interaction </label>
                                         <input type="number" name="interaction">
                                     </div>
@@ -125,7 +125,7 @@
                                     </div>
                                     <div class="inputs">
                                         <label for="interaction">Interaction </label>
-                                        <input type="number" name="interaction">
+                                        <input type="number" name="interaction" required>
                                     </div>
                                     <input id="LDAsubmit" class="generateTopics" type="submit" value="generate topics"/>
                                 </form>
@@ -287,10 +287,23 @@
             }
         });
     });
-    $("#bnt-w2vLDA, #bnt-w2vLSA").on("click", function () {
+    $("#bnt-w2vLSA").on("click", function () {
         try {
             let link = document.createElement('a');
-            let filePath = "http://localhost/IC-2024/site/exportExcel/word2Vec.xlsx";
+            let filePath = "http://localhost/IC-2024/site/exportExcel/word2Vec_lsa.xlsx";
+            link.href = filePath;
+            link.download = 'word2Vec.xlsx';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } catch (error) {
+            console.error('Erro:', error);
+        }
+    });
+    $("#bnt-w2vLDA").on("click", function () {
+        try {
+            let link = document.createElement('a');
+            let filePath = "http://localhost/IC-2024/site/exportExcel/word2Vec_lda.xlsx";
             link.href = filePath;
             link.download = 'word2Vec.xlsx';
             document.body.appendChild(link);

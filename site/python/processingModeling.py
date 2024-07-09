@@ -180,7 +180,7 @@ if(typeModeling == '1'):
                             dataW2V.append([topic_id, word1, word2, similarity])
                         
         dfW2V_export = pd.DataFrame(dataW2V, columns=["topic", "word", "similar_word", "similarity"])
-        word2Vec_file = "word2Vec.xlsx"
+        word2Vec_file = "word2Vec_lda.xlsx"
 
         W2Voutput_path = os.path.join(dir, word2Vec_file)
         try:
@@ -198,17 +198,10 @@ if(typeModeling == '1'):
 # Tipo LSA
 if(typeModeling == '2'):
     try:
-        lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus,
-                                            id2word=dictionary,
-                                            num_topics= int(topics),
-                                            random_state=100, #semente
-                                            update_every=1, #frequência que o modelo é atualizado ao ver cada documento
-                                            chunksize=10, #número de documentos a serem usados em cada iteração
-                                            passes=int(interaction), #número de vezes que o modelo percorrerá o corpus inteiro durante o treinamento
-                                            alpha="auto" #distribuição de tópicos por documento
-                                            )
-        # Visualizar os tópicos gerados pelo modelo LDA
-        topics = lda_model.show_topics(num_topics=int(topics), num_words=int(words), formatted=False)
+        from gensim.models import LsiModel
+
+        lsa_model = LsiModel(corpus=corpus, num_topics=int(topics), id2word=dictionary)
+        topics = lsa_model.show_topics(num_topics=int(topics), num_words=int(words), formatted=False)
 
         # Criar um DataFrame
         data = []
@@ -217,7 +210,8 @@ if(typeModeling == '2'):
                 data.append([topic_id, word, weight])
 
         df_export = pd.DataFrame(data, columns=["topic", "word", "weight"])
-        excel_file = "lda.xlsx"
+        excel_file = "lsa.xlsx"
+
         dir = r"D:\Downloads\Programas\xampp\htdocs\IC-2024\site\exportExcel"
         # Combina o diretório e o nome do arquivo
         output_path = os.path.join(dir, excel_file)
@@ -227,7 +221,32 @@ if(typeModeling == '2'):
             #se tudo der certo, retorna caminho do arquivo
             print(output_path)
         except Error as e:
-            print("Erro EXCEL")
+            print("Erro EXCEL LSA")
+            exit()
+
+        # Parte do Word2Vec
+        w2v_model = gensim.models.Word2Vec(vector_size=10, window=5, min_count=1, workers=4)
+        w2v_model.build_vocab(array_df, progress_per=1000)
+        w2v_model.train(array_df, total_examples=w2v_model.corpus_count, epochs=w2v_model.epochs)
+
+        dataW2V = []
+        for topic_id, topic_words in topics:
+            words = [word for word, _ in topic_words]
+            for i, word1 in enumerate(words):
+                if word1 in w2v_model.wv.key_to_index:
+                    for j, word2 in enumerate(words):
+                        if i != j and word2 in w2v_model.wv.key_to_index:
+                            similarity = w2v_model.wv.similarity(word1, word2)
+                            dataW2V.append([topic_id, word1, word2, similarity])
+                        
+        dfW2V_export = pd.DataFrame(dataW2V, columns=["topic", "word", "similar_word", "similarity"])
+        word2Vec_file = "word2Vec_lsa.xlsx"
+
+        W2Voutput_path = os.path.join(dir, word2Vec_file)
+        try:
+            dfW2V_export.to_excel(W2Voutput_path, index=False)
+        except Error as e:
+            print("Erro EXCEL W2V")
             exit()
 
     except Error as e:

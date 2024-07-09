@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $lemma = intval($_POST['lemmaCorpus']);
     $topics = $_POST['topics'];
     $words = $_POST['words'];
-    $interaction = $_POST['interaction'];
+    $interaction = $_POST['interaction']? $_POST['interaction'] : 1;
     $typeModeling = $_POST['typeModeling'];
 
     // echo $clean,' - ', $lemma,' - ', $topics,' - ', $words,' - ', $interaction, ' - ', $typeModeling;
