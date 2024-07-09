@@ -131,6 +131,8 @@ ul {
 }
 .list li p{
     cursor: pointer;
+    text-align: left;
+    width: 100%;
 }
 .list li:first-child{
     margin-top: 1rem;
@@ -144,8 +146,10 @@ ul {
         font-weight: 400;
     }
 }
-.list li .fulltext{
-    display: none;
+.list li .name{
+    white-space: nowrap; /* Impede a quebra de linha */
+  overflow: hidden; /* Esconde o texto que ultrapassa a largura do contêiner */
+  text-overflow: ellipsis;
 }
 .pagination-wrap{
     grid-area: pagination;
